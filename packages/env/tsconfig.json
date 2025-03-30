@@ -1,0 +1,6 @@
+{
+    "extends": "@sgcst/tsconfig/library.json",
+    "include": [
+      "index.ts"
+    ]
+  }
