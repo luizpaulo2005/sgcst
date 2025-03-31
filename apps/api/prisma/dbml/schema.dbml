@@ -1,0 +1,112 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table usuarios {
+  id String [pk]
+  nome String [not null]
+  email String [unique, not null]
+  senha String [not null]
+  avatarUrl String
+  cargo Cargo [not null, default: 'USUARIO']
+  ativo Boolean [not null, default: true]
+  criadoEm DateTime [default: `now()`, not null]
+  atualizadoEm DateTime [not null]
+  comentarios comentarios [not null]
+  tecnicoChamado tecnico_chamado [not null]
+  chamadosSolicitados chamados [not null]
+}
+
+Table categorias {
+  id String [pk]
+  descricao String [not null]
+  ativo Boolean [not null, default: true]
+  chamados chamados [not null]
+}
+
+Table locais {
+  id String [pk]
+  nome String [not null]
+  avatarUrl String
+  ativo Boolean [not null, default: true]
+  chamados chamados [not null]
+}
+
+Table chamados {
+  id String [pk]
+  titulo String [not null]
+  descricao String [not null]
+  execucao String
+  status Status [not null, default: 'NOVO']
+  prioridade Prioridade [not null, default: 'BAIXA']
+  dataAbertura DateTime [default: `now()`, not null]
+  dataFechamento DateTime
+  dataReabertura DateTime
+  atualizadoEm DateTime [not null]
+  fechadoPor String
+  usuario usuarios [not null]
+  abertoPor String [not null]
+  categoria categorias [not null]
+  categoriaId String [not null]
+  local locais
+  localId String
+  comentarios comentarios [not null]
+  tecnico tecnico_chamado
+}
+
+Table comentarios {
+  id String [pk]
+  comentario String [not null]
+  chamado chamados [not null]
+  chamadoId String [not null]
+  usuario usuarios [not null]
+  usuarioId String [not null]
+  criadoEm DateTime [default: `now()`, not null]
+  atualizadoEm DateTime [not null]
+}
+
+Table tecnico_chamado {
+  id String [pk]
+  chamado chamados [not null]
+  chamadoId String [unique, not null]
+  usuario usuarios [not null]
+  usuarioId String [not null]
+  criadoEm DateTime [default: `now()`, not null]
+  atualizadoEm DateTime [not null]
+}
+
+Enum Cargo {
+  ADMINISTRADOR
+  TECNICO
+  USUARIO
+}
+
+Enum Status {
+  NOVO
+  ABERTO
+  EM_ANDAMENTO
+  EM_ESPERA
+  VALIDANDO
+  FECHADO
+  CANCELADO
+}
+
+Enum Prioridade {
+  BAIXA
+  MEDIA
+  ALTA
+}
+
+Ref: chamados.abertoPor > usuarios.id
+
+Ref: chamados.categoriaId > categorias.id
+
+Ref: chamados.localId > locais.id
+
+Ref: comentarios.chamadoId > chamados.id
+
+Ref: comentarios.usuarioId > usuarios.id
+
+Ref: tecnico_chamado.chamadoId - chamados.id
+
+Ref: tecnico_chamado.usuarioId > usuarios.id
