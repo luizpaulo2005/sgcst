@@ -4,9 +4,9 @@ import { ZodError } from 'zod'
 import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
 
-type FastifyErrorHandle = FastifyInstance['errorHandler']
+type FastifyErrorHandler = FastifyInstance['errorHandler']
 
-const errorHandler: FastifyErrorHandle = (error, request, reply) => {
+const errorHandler: FastifyErrorHandler = (error, request, reply) => {
   if (error instanceof ZodError) {
     return reply.status(400).send({
       message: 'Erro de validação.',
