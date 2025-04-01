@@ -18,13 +18,15 @@ enum Cargo {
 }
 
 model Usuario {
-  id        String  @id @default(uuid())
-  nome      String
-  email     String  @unique
-  senha     String
-  avatarUrl String? @map("avatar_url")
-  cargo     Cargo   @default(USUARIO)
-  ativo     Boolean @default(true)
+  id              String  @id @default(uuid())
+  googleId        String? @unique @map("google_id")
+  nome            String
+  email           String  @unique
+  senha           String?
+  avatarUrl       String? @map("avatar_url")
+  cargo           Cargo   @default(USUARIO)
+  ativo           Boolean @default(true)
+  emailVerificado Boolean @default(false) @map("email_verificado")
 
   criadoEm     DateTime @default(now()) @map("criado_em")
   atualizadoEm DateTime @updatedAt @map("atualizado_em")

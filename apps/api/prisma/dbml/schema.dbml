@@ -4,12 +4,14 @@
 
 Table usuarios {
   id String [pk]
+  googleId String [unique]
   nome String [not null]
   email String [unique, not null]
-  senha String [not null]
+  senha String
   avatarUrl String
   cargo Cargo [not null, default: 'USUARIO']
   ativo Boolean [not null, default: true]
+  emailVerificado Boolean [not null, default: false]
   criadoEm DateTime [default: `now()`, not null]
   atualizadoEm DateTime [not null]
   comentarios comentarios [not null]
