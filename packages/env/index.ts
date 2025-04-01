@@ -16,6 +16,8 @@ const env = createEnv({
     NODEMAILER_SMTP_PORT: z.coerce.number(),
     NODEMAILER_SMTP_USER: z.string(),
     NODEMAILER_SMTP_PASSWORD: z.string(),
+
+    WEB_URL: z.string().url(),
   },
   client: {},
   shared: {
@@ -33,6 +35,7 @@ const env = createEnv({
     NODEMAILER_SMTP_PORT: process.env.NODEMAILER_SMTP_PORT,
     NODEMAILER_SMTP_USER: process.env.NODEMAILER_SMTP_USER,
     NODEMAILER_SMTP_PASSWORD: process.env.NODEMAILER_SMTP_PASSWORD,
+    WEB_URL: process.env.WEB_URL,
   },
   emptyStringAsUndefined: true,
 })
