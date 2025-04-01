@@ -34,8 +34,27 @@ model Usuario {
   comentarios         Comentario[]
   tecnicoChamado      TecnicoChamado[]
   chamadosSolicitados Chamado[]
+  tokens               Token[]
 
   @@map("usuarios")
+}
+
+enum TipoToken {
+  RECUPERAR_SENHA
+  DEFINIR_SENHA
+}
+
+model Token {
+  id   String    @id @default(uuid())
+  tipo TipoToken
+
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+
+  criadoEm  DateTime @default(now()) @map("criado_em")
+  validoAte DateTime @map("valido_ate")
+
+  @@map("tokens")
 }
 
 model Categoria {

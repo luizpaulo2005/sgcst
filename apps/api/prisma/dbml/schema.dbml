@@ -17,6 +17,16 @@ Table usuarios {
   comentarios comentarios [not null]
   tecnicoChamado tecnico_chamado [not null]
   chamadosSolicitados chamados [not null]
+  tokens tokens [not null]
+}
+
+Table tokens {
+  id String [pk]
+  tipo TipoToken [not null]
+  usuario usuarios [not null]
+  usuarioId String [not null]
+  criadoEm DateTime [default: `now()`, not null]
+  validoAte DateTime [not null]
 }
 
 Table categorias {
@@ -83,6 +93,11 @@ Enum Cargo {
   USUARIO
 }
 
+Enum TipoToken {
+  RECUPERAR_SENHA
+  DEFINIR_SENHA
+}
+
 Enum Status {
   NOVO
   ABERTO
@@ -98,6 +113,8 @@ Enum Prioridade {
   MEDIA
   ALTA
 }
+
+Ref: tokens.usuarioId > usuarios.id
 
 Ref: chamados.abertoPor > usuarios.id
 
