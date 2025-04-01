@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { autenticarComGoogle } from './routes/auth/autenticar-com-google'
+import { autenticarComSenha } from './routes/auth/autenticar-com-senha'
 import { obterPerfil } from './routes/auth/obter-perfil'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -53,6 +54,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCors)
 
 app.register(autenticarComGoogle)
+app.register(autenticarComSenha)
 app.register(obterPerfil)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
