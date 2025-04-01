@@ -16,6 +16,7 @@ import { autenticarComGoogle } from './routes/auth/autenticar-com-google'
 import { autenticarComSenha } from './routes/auth/autenticar-com-senha'
 import { obterPerfil } from './routes/auth/obter-perfil'
 import { redefinirSenha } from './routes/auth/redefinir-senha'
+import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -58,6 +59,7 @@ app.register(autenticarComGoogle)
 app.register(autenticarComSenha)
 app.register(obterPerfil)
 app.register(redefinirSenha)
+app.register(solicitarRedefinicaoSenha)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
