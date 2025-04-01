@@ -85,14 +85,14 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
         })
         .parse(googleUserData)
 
-      let user = await prisma.usuario.findUnique({
+      let usuario = await prisma.usuario.findUnique({
         where: {
           email,
         },
       })
 
-      if (!user) {
-        user = await prisma.usuario.create({
+      if (!usuario) {
+        usuario = await prisma.usuario.create({
           data: {
             googleId: sub,
             nome: name,
@@ -105,7 +105,7 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
 
       const token = await reply.jwtSign(
         {
-          sub: user.id,
+          sub: usuario.id,
         },
         {
           sign: {
