@@ -12,6 +12,9 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { autenticarComGoogle } from './routes/auth/autenticar-com-google'
+import { obterPerfil } from './routes/auth/obter-perfil'
+
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setSerializerCompiler(serializerCompiler)
@@ -48,6 +51,9 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCors)
+
+app.register(autenticarComGoogle)
+app.register(obterPerfil)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
