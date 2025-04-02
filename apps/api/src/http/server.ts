@@ -14,6 +14,7 @@ import {
 import { errorHandler } from './error-handler'
 import { autenticarComGoogle } from './routes/auth/autenticar-com-google'
 import { autenticarComSenha } from './routes/auth/autenticar-com-senha'
+import { criarUsuario } from './routes/auth/criar-usuario'
 import { obterPerfil } from './routes/auth/obter-perfil'
 import { redefinirSenha } from './routes/auth/redefinir-senha'
 import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
@@ -60,6 +61,7 @@ app.register(autenticarComSenha)
 app.register(obterPerfil)
 app.register(redefinirSenha)
 app.register(solicitarRedefinicaoSenha)
+app.register(criarUsuario)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
