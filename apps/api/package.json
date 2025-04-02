@@ -18,7 +18,7 @@
         "bcryptjs": "^3.0.2",
         "fastify": "^5.2.2",
         "fastify-plugin": "^5.0.1",
-        "fastify-type-provider-zod": "1.1.9",
+        "fastify-type-provider-zod": "^4.0.2",
         "nodemailer": "^6.10.0",
         "zod": "^3.24.2"
     },
