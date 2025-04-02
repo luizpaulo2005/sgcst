@@ -96,6 +96,7 @@ Enum Cargo {
 Enum TipoToken {
   RECUPERAR_SENHA
   DEFINIR_SENHA
+  VERIFICAR_EMAIL
 }
 
 Enum Status {

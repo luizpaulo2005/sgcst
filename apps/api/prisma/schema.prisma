@@ -42,6 +42,7 @@ model Usuario {
 enum TipoToken {
   RECUPERAR_SENHA
   DEFINIR_SENHA
+  VERIFICAR_EMAIL
 }
 
 model Token {
