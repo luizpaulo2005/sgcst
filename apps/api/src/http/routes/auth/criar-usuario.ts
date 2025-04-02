@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs'
 import type { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -36,11 +37,13 @@ const criarUsuario = async (app: FastifyInstance) => {
         throw new BadRequestError('Usuário com este e-mail já existe.')
       }
 
+      const senhaHash = await hash(senha, 6)
+
       await prisma.usuario.create({
         data: {
           nome,
           email,
-          senha,
+          senha: senhaHash,
         },
       })
 
