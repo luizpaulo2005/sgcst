@@ -103,6 +103,17 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
         })
       }
 
+      await prisma.usuario.update({
+        where: {
+          id: usuario.id,
+        },
+        data: {
+          googleId: sub,
+          avatarUrl: usuario.avatarUrl ?? picture,
+          emailVerificado: emailVerified,
+        },
+      })
+
       const token = await reply.jwtSign(
         {
           sub: usuario.id,
