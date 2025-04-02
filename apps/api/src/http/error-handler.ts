@@ -1,5 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import { hasZodFastifySchemaValidationErrors } from 'fastify-type-provider-zod'
+import { ZodError } from 'zod'
 
 import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
@@ -20,6 +21,13 @@ const errorHandler: FastifyErrorHandler = (error, request, reply) => {
           received: validation.params.issue.received,
         }
       }),
+    })
+  }
+
+  if (error instanceof ZodError) {
+    reply.status(400).send({
+      message: 'Erro de validação.',
+      errors: error.flatten().fieldErrors,
     })
   }
 
