@@ -5,7 +5,7 @@
 Table usuarios {
   id String [pk]
   googleId String [unique]
-  nome String [not null]
+  nome String
   email String [unique, not null]
   senha String
   avatarUrl String

@@ -20,7 +20,7 @@ enum Cargo {
 model Usuario {
   id              String  @id @default(uuid())
   googleId        String? @unique @map("google_id")
-  nome            String
+  nome            String?
   email           String  @unique
   senha           String?
   avatarUrl       String? @map("avatar_url")
