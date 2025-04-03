@@ -11,16 +11,18 @@ type PermissoesPorCargo = (
 
 const permissoes: Record<Cargo, PermissoesPorCargo> = {
   ADMINISTRADOR(_, { can }) {
-    can('gerenciar', 'todos')
+    can('manage', 'all')
   },
   TECNICO(_, { can }) {
     can('gerenciar', 'Chamado')
+    can('visualizar', 'Convite')
   },
   USUARIO(usuario, { can }) {
     can('abrir', 'Chamado')
     can(['cancelar', 'visualizar'], 'Chamado', {
       abertoPor: { $eq: usuario.id },
     })
+    can('visualizar', 'Convite')
   },
 }
 

@@ -9,16 +9,19 @@ import { z } from 'zod'
 import type { Usuario } from './models/usuario'
 import { permissoes } from './permissoes'
 import { chamadoSubject } from './subjects/chamado'
+import { conviteSubject } from './subjects/convite'
 import { usuarioSubject } from './subjects/usuario'
 
 export * from './permissoes'
 export * from './subjects/chamado'
+export * from './subjects/convite'
 export * from './subjects/usuario'
 
 const appAbilitiesSchema = z.union([
   usuarioSubject,
   chamadoSubject,
-  z.tuple([z.literal('gerenciar'), z.literal('todos')]),
+  conviteSubject,
+  z.tuple([z.literal('manage'), z.literal('all')]),
 ])
 
 type AppAbilities = z.infer<typeof appAbilitiesSchema>
