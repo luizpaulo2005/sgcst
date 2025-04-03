@@ -48,6 +48,21 @@ const autenticarComSenha = async (app: FastifyInstance) => {
       }
 
       if (!usuario.senha) {
+        const tokenExistente = await prisma.token.findFirst({
+          where: {
+            usuarioId: usuario.id,
+            tipo: 'DEFINIR_SENHA',
+          },
+        })
+
+        if (tokenExistente) {
+          await prisma.token.delete({
+            where: {
+              id: tokenExistente.id,
+            },
+          })
+        }
+
         const token = await prisma.token.create({
           data: {
             tipo: 'DEFINIR_SENHA',
@@ -60,7 +75,7 @@ const autenticarComSenha = async (app: FastifyInstance) => {
           from: 'SGCST',
           to: email,
           subject: 'Definir senha',
-          html: `Olá ${usuario.nome}, clique <a href="${env.WEB_URL}/auth/definir-senha?token=${token.id}">aqui</a> definir sua senha. O link é válido por 24 horas.`,
+          html: `Olá ${usuario.email}, clique <a href="${env.WEB_URL}/auth/definir-senha?token=${token.id}">aqui</a> definir sua senha. O link é válido por 24 horas.`,
         })
 
         throw new BadRequestError(
