@@ -19,6 +19,7 @@ const solicitarVerificacaoEmail = async (app: FastifyInstance) => {
         schema: {
           tags: ['autenticacao'],
           summary: 'Solicitar verificação de e-mail',
+          security: [{ bearerAuth: [] }],
           response: {
             204: z.null(),
           },

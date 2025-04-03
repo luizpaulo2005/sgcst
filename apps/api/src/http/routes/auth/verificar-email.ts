@@ -17,6 +17,7 @@ const verificarEmail = async (app: FastifyInstance) => {
         schema: {
           tags: ['autenticacao'],
           summary: 'Verificar e-mail',
+          security: [{ bearerAuth: [] }],
           querystring: z.object({
             token: z.string(),
           }),
