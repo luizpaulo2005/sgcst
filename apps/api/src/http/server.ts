@@ -20,6 +20,10 @@ import { redefinirSenha } from './routes/auth/redefinir-senha'
 import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
 import { solicitarVerificacaoEmail } from './routes/auth/solicitar-verificacao-email'
 import { verificarEmail } from './routes/auth/verificar-email'
+import { aceitarConvite } from './routes/convites/aceitar-convite'
+import { criarConvite } from './routes/convites/criar-convite'
+import { obterConvites } from './routes/convites/obter-convites'
+import { revogarConvite } from './routes/convites/revogar-convite'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -66,6 +70,11 @@ app.register(redefinirSenha)
 app.register(criarUsuario)
 app.register(solicitarVerificacaoEmail)
 app.register(verificarEmail)
+
+app.register(criarConvite)
+app.register(aceitarConvite)
+app.register(revogarConvite)
+app.register(obterConvites)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
