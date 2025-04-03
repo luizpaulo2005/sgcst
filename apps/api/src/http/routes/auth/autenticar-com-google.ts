@@ -5,6 +5,8 @@ import { z } from 'zod'
 
 import { prisma } from '@/lib/prisma'
 
+import { UnauthorizedError } from '../_errors/unauthorized-error'
+
 const autenticarComGoogle = async (app: FastifyInstance) => {
   app.withTypeProvider<ZodTypeProvider>().post(
     '/auth/google',
@@ -101,6 +103,12 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
             emailVerificado: emailVerified,
           },
         })
+      }
+
+      if (!usuario.ativo) {
+        throw new UnauthorizedError(
+          'Usuário inativo, entre em contato com os administradores',
+        )
       }
 
       await prisma.usuario.update({

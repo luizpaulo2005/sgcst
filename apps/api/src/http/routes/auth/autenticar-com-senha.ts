@@ -8,6 +8,7 @@ import { mail } from '@/lib/nodemailer'
 import { prisma } from '@/lib/prisma'
 
 import { BadRequestError } from '../_errors/bad-request-error'
+import { UnauthorizedError } from '../_errors/unauthorized-error'
 
 const autenticarComSenha = async (app: FastifyInstance) => {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -38,6 +39,12 @@ const autenticarComSenha = async (app: FastifyInstance) => {
 
       if (!usuario) {
         throw new BadRequestError('Credenciais inválidas')
+      }
+
+      if (!usuario.ativo) {
+        throw new UnauthorizedError(
+          'Usuário inativo, entre em contato com os administradores',
+        )
       }
 
       if (!usuario.senha) {
