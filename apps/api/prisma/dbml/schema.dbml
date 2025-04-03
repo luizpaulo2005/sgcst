@@ -18,6 +18,7 @@ Table usuarios {
   tecnicoChamado tecnico_chamado [not null]
   chamadosSolicitados chamados [not null]
   tokens tokens [not null]
+  convites convites [not null]
 }
 
 Table tokens {
@@ -27,6 +28,15 @@ Table tokens {
   usuarioId String [not null]
   criadoEm DateTime [default: `now()`, not null]
   validoAte DateTime [not null]
+}
+
+Table convites {
+  id String [pk]
+  email String [unique, not null]
+  cargo Cargo [not null]
+  criadoEm DateTime [default: `now()`, not null]
+  usuario usuarios
+  criadoPor String
 }
 
 Table categorias {
@@ -116,6 +126,8 @@ Enum Prioridade {
 }
 
 Ref: tokens.usuarioId > usuarios.id
+
+Ref: convites.criadoPor > usuarios.id [delete: Set Null]
 
 Ref: chamados.abertoPor > usuarios.id
 
