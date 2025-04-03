@@ -18,6 +18,8 @@ import { criarUsuario } from './routes/auth/criar-usuario'
 import { obterPerfil } from './routes/auth/obter-perfil'
 import { redefinirSenha } from './routes/auth/redefinir-senha'
 import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
+import { solicitarVerificacaoEmail } from './routes/auth/solicitar-verificacao-email'
+import { verificarEmail } from './routes/auth/verificar-email'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -59,9 +61,11 @@ app.register(fastifyCors)
 app.register(autenticarComGoogle)
 app.register(autenticarComSenha)
 app.register(obterPerfil)
-app.register(redefinirSenha)
 app.register(solicitarRedefinicaoSenha)
+app.register(redefinirSenha)
 app.register(criarUsuario)
+app.register(solicitarVerificacaoEmail)
+app.register(verificarEmail)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
