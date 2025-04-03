@@ -1,6 +1,8 @@
 import type { FastifyInstance } from 'fastify'
 import fastifyPlugin from 'fastify-plugin'
 
+import { prisma } from '@/lib/prisma'
+
 import { UnauthorizedError } from '../routes/_errors/unauthorized-error'
 
 const auth = fastifyPlugin(async (app: FastifyInstance) => {
@@ -13,6 +15,22 @@ const auth = fastifyPlugin(async (app: FastifyInstance) => {
       } catch {
         throw new UnauthorizedError('Token inválido.')
       }
+    }
+
+    request.getCurrentUserRole = async () => {
+      const usuarioId = await request.getCurrentUserId()
+
+      const usuario = await prisma.usuario.findFirst({
+        where: {
+          id: usuarioId,
+        },
+      })
+
+      if (!usuario) {
+        throw new UnauthorizedError('Usuário não encontrado.')
+      }
+
+      return usuario.cargo
     }
   })
 })
