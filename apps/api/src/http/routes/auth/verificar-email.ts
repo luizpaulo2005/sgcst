@@ -1,3 +1,4 @@
+import { env } from '@sgcst/env'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -54,7 +55,7 @@ const verificarEmail = async (app: FastifyInstance) => {
           }),
         ])
 
-        return reply.status(204).send()
+        return reply.status(204).redirect(env.WEB_URL)
       },
     )
 }
