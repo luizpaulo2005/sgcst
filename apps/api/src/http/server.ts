@@ -24,6 +24,7 @@ import { aceitarConvite } from './routes/convites/aceitar-convite'
 import { criarConvite } from './routes/convites/criar-convite'
 import { obterConvites } from './routes/convites/obter-convites'
 import { revogarConvite } from './routes/convites/revogar-convite'
+import { obterLocais } from './routes/locais/obter-locais'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -75,6 +76,8 @@ app.register(criarConvite)
 app.register(aceitarConvite)
 app.register(revogarConvite)
 app.register(obterConvites)
+
+app.register(obterLocais)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
