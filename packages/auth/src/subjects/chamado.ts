@@ -4,7 +4,7 @@ import { chamadoSchema } from '../models/chamado'
 
 const chamadoSubject = z.tuple([
   z.union([
-    z.literal('gerenciar'),
+    z.literal('manage'),
     z.literal('abrir'),
     z.literal('visualizar'),
     z.literal('atualizar'),

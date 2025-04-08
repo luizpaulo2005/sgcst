@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const usuarioSubject = z.tuple([
   z.union([
-    z.literal('gerenciar'),
+    z.literal('manage'),
     z.literal('visualizar'),
     z.literal('atualizar'),
     z.literal('excluir'),

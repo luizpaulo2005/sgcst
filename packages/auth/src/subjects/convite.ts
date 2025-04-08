@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const conviteSubject = z.tuple([
   z.union([
-    z.literal('gerenciar'),
+    z.literal('manage'),
     z.literal('criar'),
     z.literal('visualizar'),
     z.literal('excluir'),
