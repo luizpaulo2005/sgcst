@@ -16,6 +16,7 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
   TECNICO(_, { can }) {
     can('manage', 'Chamado')
     can(['criar', 'atualizar', 'visualizar'], 'Categoria')
+    can(['criar', 'atualizar', 'visualizar'], 'Local')
   },
   USUARIO(usuario, { can }) {
     can('abrir', 'Chamado')
@@ -23,6 +24,7 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
       abertoPor: { $eq: usuario.id },
     })
     can('visualizar', 'Categoria')
+    can('visualizar', 'Local')
   },
 }
 

@@ -11,6 +11,7 @@ import { permissoes } from './permissoes'
 import { categoriaSubject } from './subjects/categoria'
 import { chamadoSubject } from './subjects/chamado'
 import { conviteSubject } from './subjects/convite'
+import { localSubject } from './subjects/local'
 import { usuarioSubject } from './subjects/usuario'
 
 export * from './permissoes'
@@ -23,6 +24,7 @@ const appAbilitiesSchema = z.union([
   chamadoSubject,
   conviteSubject,
   categoriaSubject,
+  localSubject,
   z.tuple([z.literal('manage'), z.literal('all')]),
 ])
 
