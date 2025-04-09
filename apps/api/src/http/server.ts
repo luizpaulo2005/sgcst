@@ -20,6 +20,10 @@ import { redefinirSenha } from './routes/auth/redefinir-senha'
 import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
 import { solicitarVerificacaoEmail } from './routes/auth/solicitar-verificacao-email'
 import { verificarEmail } from './routes/auth/verificar-email'
+import { atualizarStatusCategoria } from './routes/categorias/atualizar-status-categoria'
+import { criarCategoria } from './routes/categorias/criar-categoria'
+import { editarCategoria } from './routes/categorias/editar-categoria'
+import { obterCategorias } from './routes/categorias/obter-categorias'
 import { aceitarConvite } from './routes/convites/aceitar-convite'
 import { criarConvite } from './routes/convites/criar-convite'
 import { obterConvites } from './routes/convites/obter-convites'
@@ -84,6 +88,11 @@ app.register(obterLocais)
 app.register(criarLocal)
 app.register(editarLocal)
 app.register(atualizarStatusLocal)
+
+app.register(obterCategorias)
+app.register(criarCategoria)
+app.register(editarCategoria)
+app.register(atualizarStatusCategoria)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
