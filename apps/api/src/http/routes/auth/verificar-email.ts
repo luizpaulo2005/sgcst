@@ -38,6 +38,12 @@ const verificarEmail = async (app: FastifyInstance) => {
           throw new UnauthorizedError()
         }
 
+        const dataAtual = new Date()
+
+        if (dataAtual > tokenFromParams.validoAte) {
+          throw new UnauthorizedError('Código expirado.')
+        }
+
         await prisma.$transaction([
           prisma.usuario.update({
             where: {
