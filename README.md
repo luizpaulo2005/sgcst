@@ -6,18 +6,18 @@ Este repositorio contém o código fonte de um sistema para gerenciamento de cha
 
 ### Autenticação
 
-- [✅] Deve ser possível criar uma conta (email, senha e nome);
-- [✅] Deve ser possível autenticar usando email e senha;
-- [✅] Deve ser possível autenticar usando a conta do google;
-- [✅] Deve ser possível recuperar a senha por email;
-- [✅] Deve ser possível verificar o e-mail;
+- [x] Deve ser possível criar uma conta (email, senha e nome);
+- [x] Deve ser possível autenticar usando email e senha;
+- [x] Deve ser possível autenticar usando a conta do google;
+- [x] Deve ser possível recuperar a senha por email;
+- [x] Deve ser possível verificar o e-mail;
 
 ### Convites
 
-- [✅] Deve ser possível convidar um técnico/adminstrador para o sistema;
-- [✅] Deve ser possível aceitar o convite;
-- [✅] Deve ser possível listar todos os convites;
-- [✅] Deve ser possível revogar um convite;
+- [x] Deve ser possível convidar um técnico/adminstrador para o sistema;
+- [x] Deve ser possível aceitar o convite;
+- [x] Deve ser possível listar todos os convites;
+- [x] Deve ser possível revogar um convite;
 
 ### Técnicos
 
@@ -31,17 +31,17 @@ Este repositorio contém o código fonte de um sistema para gerenciamento de cha
 
 ### Locais
 
-- [✅] Deve ser possível listar todos os locais;
-- [✅] Deve ser possível criar novos locais;
-- [✅] Deve ser possível editar locais;
-- [✅] Deve ser possível inativar locais;
+- [x] Deve ser possível listar todos os locais;
+- [x] Deve ser possível criar novos locais;
+- [x] Deve ser possível editar locais;
+- [x] Deve ser possível inativar locais;
 
 ### Categorias
 
-- [✅] Deve ser possível listar todos as categorias;
-- [✅] Deve ser possível criar novos categorias;
-- [✅] Deve ser possível editar categorias;
-- [✅] Deve ser possível inativar categorias;
+- [ ] Deve ser possível listar todos as categorias;
+- [ ] Deve ser possível criar novos categorias;
+- [ ] Deve ser possível editar categorias;
+- [ ] Deve ser possível inativar categorias;
 
 ### Chamados
 
