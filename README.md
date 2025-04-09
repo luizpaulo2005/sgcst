@@ -38,10 +38,10 @@ Este repositorio contém o código fonte de um sistema para gerenciamento de cha
 
 ### Categorias
 
-- [ ] Deve ser possível listar todos as categorias;
-- [ ] Deve ser possível criar novos categorias;
-- [ ] Deve ser possível editar categorias;
-- [ ] Deve ser possível inativar categorias;
+- [x] Deve ser possível listar todos as categorias;
+- [x] Deve ser possível criar novos categorias;
+- [x] Deve ser possível editar categorias;
+- [x] Deve ser possível inativar categorias;
 
 ### Chamados
 
