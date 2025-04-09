@@ -26,6 +26,7 @@ const obterLocais = async (app: FastifyInstance) => {
                   id: z.string(),
                   nome: z.string(),
                   avatarUrl: z.string().url().nullable(),
+                  ativo: z.boolean().optional(),
                 }),
               ),
             }),
@@ -45,13 +46,12 @@ const obterLocais = async (app: FastifyInstance) => {
         }
 
         const locais = await prisma.local.findMany({
-          orderBy: {
-            nome: 'asc',
-          },
+          orderBy: [{ ativo: 'desc' }, { nome: 'asc' }],
           select: {
             id: true,
             nome: true,
             avatarUrl: true,
+            ativo: can('manage', 'Local') ? true : undefined,
           },
           where: {
             ativo: can('manage', 'Local') ? undefined : true,

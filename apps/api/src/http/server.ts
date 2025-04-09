@@ -24,6 +24,9 @@ import { aceitarConvite } from './routes/convites/aceitar-convite'
 import { criarConvite } from './routes/convites/criar-convite'
 import { obterConvites } from './routes/convites/obter-convites'
 import { revogarConvite } from './routes/convites/revogar-convite'
+import { atualizarStatusLocal } from './routes/locais/atualizar-status-local'
+import { criarLocal } from './routes/locais/criar-local'
+import { editarLocal } from './routes/locais/editar-local'
 import { obterLocais } from './routes/locais/obter-locais'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -78,6 +81,9 @@ app.register(revogarConvite)
 app.register(obterConvites)
 
 app.register(obterLocais)
+app.register(criarLocal)
+app.register(editarLocal)
+app.register(atualizarStatusLocal)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
