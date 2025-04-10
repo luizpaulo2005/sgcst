@@ -15,16 +15,17 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
   },
   TECNICO(_, { can }) {
     can('manage', 'Chamado')
-    can(['criar', 'atualizar', 'visualizar'], 'Categoria')
-    can(['criar', 'atualizar', 'visualizar'], 'Local')
+    can(['atualizar', 'visualizar'], ['Categoria', 'Local'], {
+      ativo: { $eq: true },
+    })
+    can(['criar'], ['Categoria', 'Local'])
   },
   USUARIO(usuario, { can }) {
     can('abrir', 'Chamado')
     can(['cancelar', 'visualizar'], 'Chamado', {
       abertoPor: { $eq: usuario.id },
     })
-    can('visualizar', 'Categoria')
-    can('visualizar', 'Local')
+    can('visualizar', ['Categoria', 'Local'], { ativo: { $eq: true } })
   },
 }
 
