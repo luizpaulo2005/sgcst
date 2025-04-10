@@ -19,6 +19,7 @@ Table usuarios {
   chamadosSolicitados chamados [not null]
   tokens tokens [not null]
   convites convites [not null]
+  logsChamados logs_chamados [not null]
 }
 
 Table tokens {
@@ -74,6 +75,7 @@ Table chamados {
   localId String
   comentarios comentarios [not null]
   tecnico tecnico_chamado
+  logs logs_chamados [not null]
 }
 
 Table comentarios {
@@ -95,6 +97,17 @@ Table tecnico_chamado {
   usuarioId String [not null]
   criadoEm DateTime [default: `now()`, not null]
   atualizadoEm DateTime [not null]
+}
+
+Table logs_chamados {
+  id String [pk]
+  acao AcaoChamado [not null]
+  dataHora DateTime [default: `now()`, not null]
+  descricao String [not null]
+  usuario usuarios [not null]
+  usuarioId String [not null]
+  chamado chamados [not null]
+  chamadoId String [not null]
 }
 
 Enum Cargo {
@@ -126,6 +139,14 @@ Enum Prioridade {
   URGENTE
 }
 
+Enum AcaoChamado {
+  ABRIR
+  FECHAR
+  REABRIR
+  COMENTAR
+  ALTERAR
+}
+
 Ref: tokens.usuarioId > usuarios.id
 
 Ref: convites.criadoPor > usuarios.id [delete: Set Null]
@@ -143,3 +164,7 @@ Ref: comentarios.usuarioId > usuarios.id
 Ref: tecnico_chamado.chamadoId - chamados.id
 
 Ref: tecnico_chamado.usuarioId > usuarios.id
+
+Ref: logs_chamados.usuarioId > usuarios.id
+
+Ref: logs_chamados.chamadoId > chamados.id

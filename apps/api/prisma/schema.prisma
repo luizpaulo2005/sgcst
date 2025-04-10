@@ -36,6 +36,7 @@ model Usuario {
   chamadosSolicitados Chamado[]
   tokens              Token[]
   convites            Convite[]
+  logsChamados        LogChamado[]
 
   @@map("usuarios")
 }
@@ -135,6 +136,7 @@ model Chamado {
 
   comentarios Comentario[]
   tecnico     TecnicoChamado?
+  logs        LogChamado[]
 
   @@map("chamados")
 }
@@ -168,4 +170,27 @@ model TecnicoChamado {
   atualizadoEm DateTime @updatedAt @map("atualizado_em")
 
   @@map("tecnico_chamado")
+}
+
+enum AcaoChamado {
+  ABRIR
+  FECHAR
+  REABRIR
+  COMENTAR
+  ALTERAR
+}
+
+model LogChamado {
+  id        String      @id @default(uuid())
+  acao      AcaoChamado
+  dataHora  DateTime    @default(now()) @map("data_hora")
+  descricao String
+
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+
+  chamado   Chamado @relation(fields: [chamadoId], references: [id])
+  chamadoId String
+
+  @@map("logs_chamados")
 }
