@@ -116,6 +116,7 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
           id: usuario.id,
         },
         data: {
+          nome: usuario.nome ?? name,
           googleId: sub,
           avatarUrl: usuario.avatarUrl ?? picture,
           emailVerificado: emailVerified,
