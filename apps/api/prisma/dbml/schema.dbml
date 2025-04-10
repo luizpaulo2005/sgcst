@@ -123,6 +123,7 @@ Enum Prioridade {
   BAIXA
   MEDIA
   ALTA
+  URGENTE
 }
 
 Ref: tokens.usuarioId > usuarios.id

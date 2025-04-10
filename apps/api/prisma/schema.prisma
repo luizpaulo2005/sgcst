@@ -107,6 +107,7 @@ enum Prioridade {
   BAIXA
   MEDIA
   ALTA
+  URGENTE
 }
 
 model Chamado {
