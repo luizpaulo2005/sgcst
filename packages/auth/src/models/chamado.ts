@@ -4,7 +4,6 @@ const chamadoSchema = z.object({
   __typename: z.literal('Chamado').default('Chamado'),
   id: z.string(),
   abertoPor: z.string(),
-  tecnicoId: z.string(),
 })
 
 type Chamado = z.infer<typeof chamadoSchema>
