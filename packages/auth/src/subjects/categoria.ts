@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { categoriaSchema } from '../models/categoria'
+
 const categoriaSubject = z.tuple([
   z.union([
     z.literal('manage'),
@@ -8,7 +10,7 @@ const categoriaSubject = z.tuple([
     z.literal('atualizar'),
     z.literal('inativar'),
   ]),
-  z.literal('Categoria'),
+  z.union([z.literal('Categoria'), categoriaSchema]),
 ])
 
 type CategoriaSubject = z.infer<typeof categoriaSubject>

@@ -18,6 +18,8 @@ export * from './permissoes'
 export * from './subjects/chamado'
 export * from './subjects/convite'
 export * from './subjects/usuario'
+export * from './subjects/local'
+export * from './subjects/categoria'
 
 const appAbilitiesSchema = z.union([
   usuarioSubject,

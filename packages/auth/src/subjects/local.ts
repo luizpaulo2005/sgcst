@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { localSchema } from '../models/local'
+
 const localSubject = z.tuple([
   z.union([
     z.literal('manage'),
@@ -8,7 +10,7 @@ const localSubject = z.tuple([
     z.literal('atualizar'),
     z.literal('inativar'),
   ]),
-  z.literal('Local'),
+  z.union([z.literal('Local'), localSchema]),
 ])
 type LocalSubject = z.infer<typeof localSubject>
 
