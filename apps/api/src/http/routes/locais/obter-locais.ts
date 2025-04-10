@@ -52,7 +52,7 @@ const obterLocais = async (app: FastifyInstance) => {
             id: true,
             nome: true,
             avatarUrl: true,
-            ativo: can('manage', 'Local') ? true : undefined,
+            ativo: true,
           },
         })
 
