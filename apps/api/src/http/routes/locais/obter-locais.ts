@@ -1,3 +1,4 @@
+import { localSchema } from '@sgcst/auth/src/models/local'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -53,12 +54,13 @@ const obterLocais = async (app: FastifyInstance) => {
             avatarUrl: true,
             ativo: can('manage', 'Local') ? true : undefined,
           },
-          where: {
-            ativo: can('manage', 'Local') ? undefined : true,
-          },
         })
 
-        return { locais }
+        const locaisFiltrados = locais.filter((local) =>
+          can('visualizar', localSchema.parse(local)),
+        )
+
+        return { locais: locaisFiltrados }
       },
     )
 }

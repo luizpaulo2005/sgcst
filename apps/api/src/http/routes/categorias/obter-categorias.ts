@@ -1,3 +1,4 @@
+import { categoriaSchema } from '@sgcst/auth/src/models/categoria'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -49,14 +50,15 @@ const obterCategorias = async (app: FastifyInstance) => {
           select: {
             id: true,
             descricao: true,
-            ativo: can('manage', 'Categoria') ? true : undefined,
-          },
-          where: {
-            ativo: can('manage', 'Categoria') ? undefined : true,
+            ativo: true,
           },
         })
 
-        return { categorias }
+        const categoriasFiltradas = categorias.filter((categoria) =>
+          can('visualizar', categoriaSchema.parse(categoria)),
+        )
+
+        return { categorias: categoriasFiltradas }
       },
     )
 }
