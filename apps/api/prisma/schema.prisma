@@ -176,7 +176,7 @@ enum AcaoChamado {
   ABRIR
   FECHAR
   REABRIR
-  COMENTAR
+  CANCELAR
   ALTERAR
 }
 
