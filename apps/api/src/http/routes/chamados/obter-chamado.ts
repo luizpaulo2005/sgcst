@@ -145,6 +145,9 @@ const obterChamado = async (app: FastifyInstance) => {
                 },
                 criadoEm: true,
               },
+              orderBy: {
+                criadoEm: 'desc',
+              },
             },
             logs: {
               select: {
