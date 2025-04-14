@@ -25,6 +25,7 @@ import { criarCategoria } from './routes/categorias/criar-categoria'
 import { editarCategoria } from './routes/categorias/editar-categoria'
 import { obterCategorias } from './routes/categorias/obter-categorias'
 import { abrirChamado } from './routes/chamados/abrir-chamado'
+import { adicionarComentario } from './routes/chamados/adicionar-comentario'
 import { assumirChamado } from './routes/chamados/assumir-chamado'
 import { cancelarChamado } from './routes/chamados/cancelar-chamado'
 import { editarChamado } from './routes/chamados/editar-chamado'
@@ -106,6 +107,7 @@ app.register(abrirChamado)
 app.register(assumirChamado)
 app.register(editarChamado)
 app.register(cancelarChamado)
+app.register(adicionarComentario)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
