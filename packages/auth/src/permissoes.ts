@@ -26,6 +26,8 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
       abertoPor: { $eq: usuario.id },
     })
     can('visualizar', ['Categoria', 'Local'], { ativo: { $eq: true } })
+    can('criar', 'Comentario')
+    can('atualizar', 'Comentario', { criadoPor: { $eq: usuario.id } })
   },
 }
 

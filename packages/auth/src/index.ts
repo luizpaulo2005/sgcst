@@ -10,16 +10,18 @@ import type { Usuario } from './models/usuario'
 import { permissoes } from './permissoes'
 import { categoriaSubject } from './subjects/categoria'
 import { chamadoSubject } from './subjects/chamado'
+import { comentarioSubject } from './subjects/comentario'
 import { conviteSubject } from './subjects/convite'
 import { localSubject } from './subjects/local'
 import { usuarioSubject } from './subjects/usuario'
 
 export * from './permissoes'
-export * from './subjects/chamado'
-export * from './subjects/convite'
-export * from './subjects/usuario'
-export * from './subjects/local'
 export * from './subjects/categoria'
+export * from './subjects/chamado'
+export * from './subjects/comentario'
+export * from './subjects/convite'
+export * from './subjects/local'
+export * from './subjects/usuario'
 
 const appAbilitiesSchema = z.union([
   usuarioSubject,
@@ -27,6 +29,7 @@ const appAbilitiesSchema = z.union([
   conviteSubject,
   categoriaSubject,
   localSubject,
+  comentarioSubject,
   z.tuple([z.literal('manage'), z.literal('all')]),
 ])
 
