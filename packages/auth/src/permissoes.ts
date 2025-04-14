@@ -19,6 +19,7 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
       ativo: { $eq: true },
     })
     can(['criar'], ['Categoria', 'Local'])
+    can('criar', 'Comentario')
   },
   USUARIO(usuario, { can }) {
     can('abrir', 'Chamado')
@@ -26,7 +27,7 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
       abertoPor: { $eq: usuario.id },
     })
     can('visualizar', ['Categoria', 'Local'], { ativo: { $eq: true } })
-    can('criar', 'Comentario')
+    can('criar', 'Comentario', { chamadoAbertoPor: { $eq: usuario.id } })
     can('atualizar', 'Comentario', { usuarioId: { $eq: usuario.id } })
   },
 }
