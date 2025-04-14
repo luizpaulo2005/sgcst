@@ -28,13 +28,12 @@ const useFormState = (
       const state = await action(data)
 
       if (state.success && onSuccess) {
+        requestFormReset(form)
         await onSuccess()
       }
 
       setFormState(state)
     })
-
-    requestFormReset(form)
   }
 
   return [formState, handleSubmit, isPending] as const
