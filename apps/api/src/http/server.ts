@@ -24,6 +24,12 @@ import { atualizarStatusCategoria } from './routes/categorias/atualizar-status-c
 import { criarCategoria } from './routes/categorias/criar-categoria'
 import { editarCategoria } from './routes/categorias/editar-categoria'
 import { obterCategorias } from './routes/categorias/obter-categorias'
+import { abrirChamado } from './routes/chamados/abrir-chamado'
+import { assumirChamado } from './routes/chamados/assumir-chamado'
+import { cancelarChamado } from './routes/chamados/cancelar-chamado'
+import { editarChamado } from './routes/chamados/editar-chamado'
+import { obterChamado } from './routes/chamados/obter-chamado'
+import { obterChamados } from './routes/chamados/obter-chamados'
 import { aceitarConvite } from './routes/convites/aceitar-convite'
 import { criarConvite } from './routes/convites/criar-convite'
 import { obterConvites } from './routes/convites/obter-convites'
@@ -93,6 +99,13 @@ app.register(obterCategorias)
 app.register(criarCategoria)
 app.register(editarCategoria)
 app.register(atualizarStatusCategoria)
+
+app.register(obterChamados)
+app.register(obterChamado)
+app.register(abrirChamado)
+app.register(assumirChamado)
+app.register(editarChamado)
+app.register(cancelarChamado)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
