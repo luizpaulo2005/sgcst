@@ -27,7 +27,7 @@ const permissoes: Record<Cargo, PermissoesPorCargo> = {
     })
     can('visualizar', ['Categoria', 'Local'], { ativo: { $eq: true } })
     can('criar', 'Comentario')
-    can('atualizar', 'Comentario', { criadoPor: { $eq: usuario.id } })
+    can('atualizar', 'Comentario', { usuarioId: { $eq: usuario.id } })
   },
 }
 
