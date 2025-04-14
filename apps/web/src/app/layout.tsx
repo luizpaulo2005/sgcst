@@ -1,8 +1,14 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
+import { Space_Grotesk as spaceGroteskFont } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/providers/theme'
+
+const spaceGrotesk = spaceGroteskFont({
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'SGCST',
@@ -16,11 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className="antialised">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <body
+          className={`antialised bg-sidebar text-foreground ${spaceGrotesk.variable}`}
+        >
           {children}
-        </ThemeProvider>
-      </body>
+        </body>
+      </ThemeProvider>
     </html>
   )
 }
