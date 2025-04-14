@@ -26,7 +26,7 @@ const LoginForm = () => {
   )
 
   return (
-    <Card className="bg-card text-card-foreground w-xl p-6 shadow">
+    <Card className="bg-card text-card-foreground w-full max-w-xl p-6 shadow">
       {!success && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
