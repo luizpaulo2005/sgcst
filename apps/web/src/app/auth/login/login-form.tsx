@@ -25,10 +25,6 @@ const LoginForm = () => {
     },
   )
 
-  if (errors) {
-    console.error(errors)
-  }
-
   return (
     <Card className="bg-card text-card-foreground w-xl p-6 shadow">
       {!success && message && (
@@ -75,17 +71,28 @@ const LoginForm = () => {
           </Link>
         </div>
         <div className="flex items-center gap-2">
-          <Button type="button" className="flex-1" variant="secondary" asChild>
+          <Button
+            disabled={isPending}
+            type="button"
+            className="flex-1"
+            variant="secondary"
+            asChild
+          >
             <Link href="/auth/registrar">Registrar</Link>
           </Button>
-          <Button className="flex-1" variant="outline">
+          <Button disabled={isPending} className="flex-1" variant="outline">
             {isPending ? <Loader2 className="size-4 animate-spin" /> : 'Entrar'}
           </Button>
         </div>
         <Separator />
       </form>
       <form action={autenticarComGoogle}>
-        <Button type="submit" variant="secondary" className="w-full">
+        <Button
+          disabled={isPending}
+          type="submit"
+          variant="secondary"
+          className="w-full"
+        >
           <img
             src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s48-fcrop64=1,00000000ffffffff-rw"
             className="size-6"
