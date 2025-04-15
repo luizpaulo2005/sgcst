@@ -25,8 +25,6 @@ const RegistrarForm = () => {
     },
   )
 
-  console.log(errors, message, success)
-
   return (
     <Card className="bg-card text-card-foreground w-full max-w-xl p-6 shadow">
       {success === false && message && (
