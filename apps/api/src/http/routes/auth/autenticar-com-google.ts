@@ -112,10 +112,10 @@ const autenticarComGoogle = async (app: FastifyInstance) => {
       }
 
       if (
-        usuario.nome === '' ||
-        usuario.avatarUrl === '' ||
-        usuario.emailVerificado === null ||
-        usuario.googleId === null
+        !usuario.nome ||
+        !usuario.avatarUrl ||
+        !usuario.emailVerificado ||
+        !usuario.googleId
       ) {
         await prisma.usuario.update({
           where: {
