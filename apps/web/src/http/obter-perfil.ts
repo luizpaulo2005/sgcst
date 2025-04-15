@@ -2,11 +2,11 @@ import { api } from './api-client'
 
 interface ObterPerfilResponse {
   usuario: {
-    name: string | null
     id: string
-    avatarUrl: string | null
+    nome: string | null
     email: string
-  } | null
+    avatarUrl: string | null
+  }
 }
 
 const obterPerfil = async () => {
