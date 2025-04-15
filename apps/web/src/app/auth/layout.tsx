@@ -1,3 +1,4 @@
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { isAuthenticated } from '@/auth/auth'
@@ -7,7 +8,10 @@ const AuthLayout = async ({
 }: Readonly<{
   children: React.ReactNode
 }>) => {
-  if (await isAuthenticated()) {
+  const header = await headers()
+  const pathname = header.get('x-current-path')
+
+  if ((await isAuthenticated()) && pathname !== '/auth/definir-senha') {
     redirect('/')
   }
 
