@@ -30,14 +30,12 @@ const DefinirSenhaForm = () => {
     },
   )
 
-  console.log(errors, message, success)
-
   return (
     <Card className="bg-card text-card-foreground w-full max-w-xl p-6 shadow">
       {!success && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
-          <AlertTitle>Erro ao realizar login!</AlertTitle>
+          <AlertTitle>Erro ao definir a senha!</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
@@ -90,7 +88,7 @@ const DefinirSenhaForm = () => {
             variant="secondary"
             asChild
           >
-            <Link href="/auth/login">Fazer login</Link>
+            <Link href="/auth/login">Voltar para login</Link>
           </Button>
           <Button disabled={isPending} className="flex-1" variant="outline">
             {isPending ? (

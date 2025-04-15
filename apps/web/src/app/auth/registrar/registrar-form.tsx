@@ -30,7 +30,7 @@ const RegistrarForm = () => {
       {success === false && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
-          <AlertTitle>Erro ao realizar login!</AlertTitle>
+          <AlertTitle>Erro ao realizar registro!</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
