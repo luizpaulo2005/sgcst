@@ -11,14 +11,12 @@ const definirSenha = async ({
   codigo,
   senha,
 }: DefinirSenhaRequest): Promise<DefinirSenhaResponse> => {
-  await api
-    .post('auth/redefinir-senha', {
-      json: {
-        codigo,
-        senha,
-      },
-    })
-    .json()
+  await api.post('auth/redefinir-senha', {
+    json: {
+      codigo,
+      senha,
+    },
+  })
 }
 
 export { definirSenha }
