@@ -27,7 +27,7 @@ const Perfil = async () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <p>{usuario.nome}</p>
+          <p>{usuario.nome ?? usuario.email}</p>
           <Avatar className="size-5">
             {usuario.avatarUrl && <AvatarImage src={usuario.avatarUrl} />}
             <AvatarFallback>
