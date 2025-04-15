@@ -24,7 +24,7 @@ const auth = async () => {
     return { usuario }
   } catch (error) {}
 
-  redirect('/api/auth/sign-out')
+  redirect('/api/auth/logout')
 }
 
 export { auth, isAuthenticated }
