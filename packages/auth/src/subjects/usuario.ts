@@ -6,6 +6,7 @@ const usuarioSubject = z.tuple([
     z.literal('visualizar'),
     z.literal('atualizar'),
     z.literal('excluir'),
+    z.literal('cancelar'),
   ]),
   z.literal('Usuario'),
 ])

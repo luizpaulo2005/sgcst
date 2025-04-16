@@ -8,7 +8,7 @@ const localSubject = z.tuple([
     z.literal('criar'),
     z.literal('visualizar'),
     z.literal('atualizar'),
-    z.literal('inativar'),
+    z.literal('cancelar'),
   ]),
   z.union([z.literal('Local'), localSchema]),
 ])
