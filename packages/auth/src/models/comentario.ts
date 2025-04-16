@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const comentarioSchema = z.object({
   __typename: z.literal('Comentario').default('Comentario'),
-  usuarioId: z.string(),
+  usuarioId: z.string().optional(),
   chamadoAbertoPor: z.string(),
 })
 
