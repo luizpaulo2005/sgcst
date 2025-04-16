@@ -29,6 +29,7 @@ import { adicionarComentario } from './routes/chamados/adicionar-comentario'
 import { assumirChamado } from './routes/chamados/assumir-chamado'
 import { cancelarChamado } from './routes/chamados/cancelar-chamado'
 import { editarChamado } from './routes/chamados/editar-chamado'
+import { editarComentario } from './routes/chamados/editar-comentario'
 import { obterChamado } from './routes/chamados/obter-chamado'
 import { obterChamados } from './routes/chamados/obter-chamados'
 import { aceitarConvite } from './routes/convites/aceitar-convite'
@@ -108,6 +109,7 @@ app.register(assumirChamado)
 app.register(editarChamado)
 app.register(cancelarChamado)
 app.register(adicionarComentario)
+app.register(editarComentario)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
