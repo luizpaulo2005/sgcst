@@ -62,7 +62,6 @@ const adicionarComentario = async (app: FastifyInstance) => {
             'criar',
             comentarioSchema.parse({
               chamadoAbertoPor: chamado.abertoPor,
-              usuarioId,
             }),
           )
         ) {
