@@ -1,11 +1,11 @@
 import { api } from './api-client'
-
 interface ObterPerfilResponse {
   usuario: {
     id: string
     nome: string | null
     email: string
     avatarUrl: string | null
+    cargo: 'ADMINISTRADOR' | 'TECNICO' | 'USUARIO'
   }
 }
 
