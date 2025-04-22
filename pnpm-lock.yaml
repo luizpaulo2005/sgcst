@@ -224,6 +224,9 @@ importers:
         specifier: ^3.24.2
         version: 3.24.2
     devDependencies:
+      '@sgcst/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@sgcst/env':
         specifier: workspace:*
         version: link:../../packages/env

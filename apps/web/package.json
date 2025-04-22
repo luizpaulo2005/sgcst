@@ -31,6 +31,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@sgcst/auth": "workspace:*",
     "@sgcst/env": "workspace:*",
     "@sgcst/eslint-config": "workspace:*",
     "@sgcst/prettier": "workspace:*",
