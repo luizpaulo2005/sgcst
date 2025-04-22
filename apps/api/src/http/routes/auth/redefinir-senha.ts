@@ -33,7 +33,7 @@ const redefinirSenha = async (app: FastifyInstance) => {
       })
 
       if (!token) {
-        throw new UnauthorizedError()
+        throw new UnauthorizedError('Código inválido.')
       }
 
       const dataAtual = new Date()
