@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 
-import { isAuthenticated } from '@/auth/auth'
+import { ability, isAuthenticated } from '@/auth/auth'
 import { Header } from '@/components/header'
+import { PermissoesProvider } from '@/components/providers/permissoes'
 import { SidebarProvider } from '@/components/providers/sidebar'
 
 const AppLayout = async ({
@@ -13,13 +14,17 @@ const AppLayout = async ({
     redirect('/auth/login')
   }
 
+  const permissoes = await ability()
+
   return (
-    <SidebarProvider>
-      <div className="flex flex-col gap-2 p-2">
-        <Header />
-        {children}
-      </div>
-    </SidebarProvider>
+    <PermissoesProvider permissoes={permissoes.rules}>
+      <SidebarProvider>
+        <div className="flex flex-col gap-2 p-2">
+          <Header />
+          {children}
+        </div>
+      </SidebarProvider>
+    </PermissoesProvider>
   )
 }
 
