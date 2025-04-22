@@ -34,6 +34,10 @@ const LoginForm = () => {
   useEffect(() => {
     const error = searchParams.get('error')
 
+    if (errors) {
+      return
+    }
+
     if (error) {
       setCallbackError({
         success: false,
@@ -44,15 +48,16 @@ const LoginForm = () => {
 
   return (
     <Card className="bg-card text-card-foreground w-full max-w-xl p-6 shadow">
-      {(!success || callbackError) && message && (
-        <Alert variant="destructive">
-          <AlertTriangle className="size-4" />
-          <AlertTitle>Erro ao realizar login!</AlertTitle>
-          <AlertDescription>
-            <p>{message ?? callbackError?.message}</p>
-          </AlertDescription>
-        </Alert>
-      )}
+      {(!success || !callbackError?.success) &&
+        (message || callbackError?.message) && (
+          <Alert variant="destructive">
+            <AlertTriangle className="size-4" />
+            <AlertTitle>Erro ao realizar login!</AlertTitle>
+            <AlertDescription>
+              <p>{message ?? callbackError?.message}</p>
+            </AlertDescription>
+          </Alert>
+        )}
       <h1 className="text-3xl font-semibold">Acesso ao painel</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">

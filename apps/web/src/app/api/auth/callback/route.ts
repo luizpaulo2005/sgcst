@@ -1,3 +1,4 @@
+import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -29,10 +30,19 @@ export async function GET(request: NextRequest) {
 
     redirectUrl.pathname = '/'
     redirectUrl.search = ''
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error instanceof HTTPError) {
+      const { message } = await error.response.json()
+
+      redirectUrl.pathname = '/auth/login'
+      redirectUrl.search = `?error=${encodeURIComponent(message)}`
+
+      return NextResponse.redirect(redirectUrl)
+    }
+
     redirectUrl.pathname = '/auth/login'
-    // redirectUrl.search = ''
-    console.log(error)
+    redirectUrl.search = `?error=${encodeURIComponent(error.message)}`
 
     return NextResponse.redirect(redirectUrl)
   }
