@@ -1,3 +1,4 @@
+import { cargoSchema } from '@sgcst/auth/src/cargos'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
@@ -25,6 +26,7 @@ const obterPerfil = async (app: FastifyInstance) => {
                 nome: z.string().nullable(),
                 email: z.string().email(),
                 avatarUrl: z.string().url().nullable(),
+                cargo: cargoSchema,
               }),
             }),
           },
@@ -39,6 +41,7 @@ const obterPerfil = async (app: FastifyInstance) => {
             nome: true,
             email: true,
             avatarUrl: true,
+            cargo: true,
           },
           where: {
             id: userId,
