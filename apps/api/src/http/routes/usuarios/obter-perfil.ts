@@ -15,7 +15,7 @@ const obterPerfil = async (app: FastifyInstance) => {
       '/perfil',
       {
         schema: {
-          tags: ['autenticacao'],
+          tags: ['usuarios'],
           summary: 'Obter informações do usuário autenticado',
           security: [{ bearerAuth: [] }],
           response: {

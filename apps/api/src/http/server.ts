@@ -14,8 +14,6 @@ import {
 import { errorHandler } from './error-handler'
 import { autenticarComGoogle } from './routes/auth/autenticar-com-google'
 import { autenticarComSenha } from './routes/auth/autenticar-com-senha'
-import { criarUsuario } from './routes/auth/criar-usuario'
-import { obterPerfil } from './routes/auth/obter-perfil'
 import { redefinirSenha } from './routes/auth/redefinir-senha'
 import { solicitarRedefinicaoSenha } from './routes/auth/solicitar-redefinicao-senha'
 import { solicitarVerificacaoEmail } from './routes/auth/solicitar-verificacao-email'
@@ -40,6 +38,10 @@ import { atualizarStatusLocal } from './routes/locais/atualizar-status-local'
 import { criarLocal } from './routes/locais/criar-local'
 import { editarLocal } from './routes/locais/editar-local'
 import { obterLocais } from './routes/locais/obter-locais'
+import { atualizarStatusUsuario } from './routes/usuarios/atualizar-status-usuario'
+import { criarUsuario } from './routes/usuarios/criar-usuario'
+import { obterPerfil } from './routes/usuarios/obter-perfil'
+import { obterUsuarios } from './routes/usuarios/obter-usuarios'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -110,6 +112,9 @@ app.register(editarChamado)
 app.register(cancelarChamado)
 app.register(adicionarComentario)
 app.register(editarComentario)
+
+app.register(obterUsuarios)
+app.register(atualizarStatusUsuario)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)

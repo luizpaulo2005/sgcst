@@ -14,7 +14,7 @@ const criarUsuario = async (app: FastifyInstance) => {
     '/usuario',
     {
       schema: {
-        tags: ['autenticacao'],
+        tags: ['usuarios'],
         summary: 'Criar um novo usuário',
         body: z.object({
           nome: z.string(),
