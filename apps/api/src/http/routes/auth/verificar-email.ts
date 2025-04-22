@@ -36,6 +36,12 @@ const verificarEmail = async (app: FastifyInstance) => {
       const dataAtual = new Date()
 
       if (dataAtual > tokenFromParams.validoAte) {
+        await prisma.token.delete({
+          where: {
+            id: tokenFromParams.id,
+          },
+        })
+
         throw new UnauthorizedError('Código expirado.')
       }
 
@@ -56,7 +62,7 @@ const verificarEmail = async (app: FastifyInstance) => {
         }),
       ])
 
-      return reply.status(204).redirect(env.WEB_URL)
+      return reply.redirect(env.WEB_URL)
     },
   )
 }
