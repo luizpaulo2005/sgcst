@@ -1,3 +1,4 @@
+import { defineAbilityFor } from '@sgcst/auth'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -7,6 +8,14 @@ const isAuthenticated = async () => {
   const cookie = await cookies()
 
   return !!cookie.get('token')?.value
+}
+
+const ability = async () => {
+  const { usuario } = await auth()
+
+  const ability = defineAbilityFor(usuario)
+
+  return ability
 }
 
 const auth = async () => {
@@ -27,4 +36,4 @@ const auth = async () => {
   redirect('/api/auth/logout')
 }
 
-export { auth, isAuthenticated }
+export { ability, auth, isAuthenticated }
