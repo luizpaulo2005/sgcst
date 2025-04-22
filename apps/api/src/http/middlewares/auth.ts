@@ -17,6 +17,22 @@ const auth = fastifyPlugin(async (app: FastifyInstance) => {
       }
     }
 
+    const usuarioId = await request.getCurrentUserId()
+
+    const usuario = await prisma.usuario.findUnique({
+      where: {
+        id: usuarioId,
+      },
+    })
+
+    if (!usuario) {
+      throw new UnauthorizedError('Usuário não encontrado.')
+    }
+
+    if (!usuario.ativo) {
+      throw new UnauthorizedError('Usuário inativo.')
+    }
+
     request.getCurrentUserRole = async () => {
       const usuarioId = await request.getCurrentUserId()
 
