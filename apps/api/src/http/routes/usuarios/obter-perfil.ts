@@ -27,6 +27,7 @@ const obterPerfil = async (app: FastifyInstance) => {
                 email: z.string().email(),
                 avatarUrl: z.string().url().nullable(),
                 cargo: cargoSchema,
+                emailVerificado: z.boolean(),
               }),
             }),
           },
@@ -42,6 +43,7 @@ const obterPerfil = async (app: FastifyInstance) => {
             email: true,
             avatarUrl: true,
             cargo: true,
+            emailVerificado: true,
           },
           where: {
             id: userId,
