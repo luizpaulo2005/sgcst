@@ -2,7 +2,8 @@
 
 import { AlertTriangle, Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -17,6 +18,11 @@ import { autenticarComEmailESenha } from './actions'
 
 const LoginForm = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [callbackError, setCallbackError] = useState<{
+    success: boolean
+    message: string
+  } | null>(null)
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     autenticarComEmailESenha,
@@ -25,14 +31,25 @@ const LoginForm = () => {
     },
   )
 
+  useEffect(() => {
+    const error = searchParams.get('error')
+
+    if (error) {
+      setCallbackError({
+        success: false,
+        message: error,
+      })
+    }
+  }, [searchParams])
+
   return (
     <Card className="bg-card text-card-foreground w-full max-w-xl p-6 shadow">
-      {!success && message && (
+      {(!success || callbackError) && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
           <AlertTitle>Erro ao realizar login!</AlertTitle>
           <AlertDescription>
-            <p>{message}</p>
+            <p>{message ?? callbackError?.message}</p>
           </AlertDescription>
         </Alert>
       )}

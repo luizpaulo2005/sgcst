@@ -15,19 +15,27 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  const { token } = await autenticarComGoogle({ code })
-
-  const cookie = await cookies()
-
-  cookie.set('token', token, {
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7days
-  })
-
   const redirectUrl = request.nextUrl.clone()
 
-  redirectUrl.pathname = '/'
-  redirectUrl.search = ''
+  try {
+    const { token } = await autenticarComGoogle({ code })
+
+    const cookie = await cookies()
+
+    cookie.set('token', token, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 7days
+    })
+
+    redirectUrl.pathname = '/'
+    redirectUrl.search = ''
+  } catch (error) {
+    redirectUrl.pathname = '/auth/login'
+    // redirectUrl.search = ''
+    console.log(error)
+
+    return NextResponse.redirect(redirectUrl)
+  }
 
   return NextResponse.redirect(redirectUrl)
 }
