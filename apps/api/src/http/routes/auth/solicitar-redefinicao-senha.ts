@@ -34,8 +34,6 @@ const solicitarRedefinicaoSenha = async (app: FastifyInstance) => {
         return reply.status(201).send()
       }
 
-      console.log('encontrado')
-
       const token = await prisma.token.create({
         data: {
           tipo: 'RECUPERAR_SENHA',
