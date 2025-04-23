@@ -30,6 +30,7 @@ import { editarChamado } from './routes/chamados/editar-chamado'
 import { editarComentario } from './routes/chamados/editar-comentario'
 import { obterChamado } from './routes/chamados/obter-chamado'
 import { obterChamados } from './routes/chamados/obter-chamados'
+import { obterChamadosPorUsuario } from './routes/chamados/obter-chamados-por-usuario'
 import { aceitarConvite } from './routes/convites/aceitar-convite'
 import { criarConvite } from './routes/convites/criar-convite'
 import { obterConvites } from './routes/convites/obter-convites'
@@ -113,6 +114,7 @@ app.register(editarChamado)
 app.register(cancelarChamado)
 app.register(adicionarComentario)
 app.register(editarComentario)
+app.register(obterChamadosPorUsuario)
 
 app.register(obterUsuarios)
 app.register(atualizarStatusUsuario)
