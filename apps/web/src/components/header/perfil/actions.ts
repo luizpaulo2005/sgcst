@@ -101,6 +101,8 @@ const solicitarRedefinicaoSenhaAction = async (data: FormData) => {
   try {
     await solicitarRedefinicaoSenha({ email })
 
+    console.log('E-mail enviado com sucesso!')
+
     return {
       success: true,
       message: 'E-mail enviado com sucesso!',
