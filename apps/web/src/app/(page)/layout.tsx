@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 import { ability, isAuthenticated } from '@/auth/auth'
-import { Header } from '@/components/header'
+import { Header } from '@/components/header/header'
 import { PermissoesProvider } from '@/components/providers/permissoes'
 import { SidebarProvider } from '@/components/providers/sidebar'
 import { Toaster } from '@/components/ui/sonner'

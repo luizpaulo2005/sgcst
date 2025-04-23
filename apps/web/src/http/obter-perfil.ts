@@ -6,11 +6,18 @@ interface ObterPerfilResponse {
     email: string
     avatarUrl: string | null
     cargo: 'ADMINISTRADOR' | 'TECNICO' | 'USUARIO'
+    emailVerificado: boolean
   }
 }
 
 const obterPerfil = async () => {
-  const result = await api.get('perfil').json<ObterPerfilResponse>()
+  const result = await api
+    .get('perfil', {
+      next: {
+        tags: ['usuario'],
+      },
+    })
+    .json<ObterPerfilResponse>()
 
   return result
 }

@@ -1,7 +1,7 @@
-import { Perfil } from './perfil'
-import { ToggleTheme } from './toggle-theme'
-import { Button } from './ui/button'
-import { SidebarTrigger } from './ui/sidebar'
+import { ToggleTheme } from '../toggle-theme'
+import { Button } from '../ui/button'
+import { SidebarTrigger } from '../ui/sidebar'
+import { Perfil } from './perfil/perfil'
 
 const Header = () => {
   return (
