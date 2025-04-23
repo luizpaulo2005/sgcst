@@ -39,6 +39,7 @@ import { criarLocal } from './routes/locais/criar-local'
 import { editarLocal } from './routes/locais/editar-local'
 import { obterLocais } from './routes/locais/obter-locais'
 import { atualizarStatusUsuario } from './routes/usuarios/atualizar-status-usuario'
+import { atualizarUsuario } from './routes/usuarios/atualizar-usuario'
 import { criarUsuario } from './routes/usuarios/criar-usuario'
 import { obterPerfil } from './routes/usuarios/obter-perfil'
 import { obterUsuarios } from './routes/usuarios/obter-usuarios'
@@ -115,6 +116,7 @@ app.register(editarComentario)
 
 app.register(obterUsuarios)
 app.register(atualizarStatusUsuario)
+app.register(atualizarUsuario)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`)
