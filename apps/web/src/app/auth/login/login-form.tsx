@@ -88,7 +88,10 @@ const LoginForm = () => {
               {errors.senha[0]}
             </p>
           )}
-          <Link className="hover:underline" href="#">
+          <Link
+            className="hover:underline"
+            href="/auth/solicitar-redefinicao-senha"
+          >
             Esqueceu a senha?
           </Link>
         </div>
