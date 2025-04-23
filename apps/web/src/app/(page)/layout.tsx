@@ -19,7 +19,7 @@ const AppLayout = async ({
   return (
     <PermissoesProvider permissoes={permissoes.rules}>
       <SidebarProvider>
-        <div className="flex flex-col gap-2 p-2">
+        <div className="flex flex-1 flex-col gap-2 p-2">
           <Header />
           {children}
         </div>
