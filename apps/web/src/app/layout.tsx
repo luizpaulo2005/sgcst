@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk as spaceGroteskFont } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/providers/theme'
+import { Toaster } from '@/components/ui/sonner'
 
 const spaceGrotesk = spaceGroteskFont({
   variable: '--font-space-grotesk',
@@ -26,6 +27,7 @@ export default function RootLayout({
         <body
           className={`antialised bg-sidebar text-foreground ${spaceGrotesk.variable}`}
         >
+          <Toaster richColors />
           {children}
         </body>
       </ThemeProvider>
