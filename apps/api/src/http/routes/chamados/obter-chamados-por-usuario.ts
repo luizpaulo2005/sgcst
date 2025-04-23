@@ -27,6 +27,7 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
                   id: z.string(),
                   titulo: z.string(),
                   status: z.string(),
+                  prioridade: z.string(),
                   dataAbertura: z.date(),
                   abertoPor: z.string(),
                   categoria: z.object({
@@ -37,6 +38,10 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
                       nome: z.string(),
                     })
                     .nullable(),
+                  usuario: z.object({
+                    nome: z.string().nullable(),
+                    email: z.string(),
+                  }),
                 }),
               ),
             }),
@@ -62,6 +67,7 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
             status: true,
             dataAbertura: true,
             abertoPor: true,
+            prioridade: true,
             categoria: {
               select: {
                 descricao: true,
@@ -70,6 +76,12 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
             local: {
               select: {
                 nome: true,
+              },
+            },
+            usuario: {
+              select: {
+                nome: true,
+                email: true,
               },
             },
           },
