@@ -54,7 +54,7 @@ const AppSidebar = () => {
               {permissoes && permissoes.can('manage', 'Chamado') && (
                 <SidebarMenuItem>
                   <SidebarMenuButton isActive={path === '/chamados'} asChild>
-                    <Link href="/">
+                    <Link href="/chamados">
                       <AppWindow />
                       Chamados
                     </Link>
