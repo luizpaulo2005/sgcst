@@ -1,4 +1,5 @@
 import { api } from './api-client'
+
 interface ObterPerfilResponse {
   usuario: {
     id: string
