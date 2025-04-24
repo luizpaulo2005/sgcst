@@ -30,6 +30,10 @@ const obterIniciais = (nome: string): string => {
     .map((texto) => texto.charAt(0).toUpperCase())
     .join('')
 
+  if (iniciais.length > 2) {
+    return iniciais.slice(0, 2)
+  }
+
   return iniciais
 }
 
