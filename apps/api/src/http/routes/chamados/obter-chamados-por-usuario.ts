@@ -88,9 +88,14 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
           where: {
             abertoPor: usuarioId,
           },
-          orderBy: {
-            dataAbertura: 'desc',
-          },
+          orderBy: [
+            {
+              dataAbertura: 'desc',
+            },
+            {
+              status: 'asc',
+            },
+          ],
         })
 
         const chamadosFiltrados = chamados.filter((chamado) => {
