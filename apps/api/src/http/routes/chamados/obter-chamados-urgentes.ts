@@ -1,4 +1,3 @@
-import { chamadoSchema } from '@sgcst/auth/src/models/chamado'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -9,16 +8,16 @@ import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { UnauthorizedError } from '../_errors/unauthorized-error'
 
-const obterChamadosPorUsuario = async (app: FastifyInstance) => {
+const obterChamadosUrgentesPendentes = async (app: FastifyInstance) => {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .get(
-      '/chamados/usuario',
+      '/chamados/urgentes',
       {
         schema: {
           tags: ['chamados'],
-          summary: 'Obter chamados abertos pelo usuário atual.',
+          summary: 'Obter chamados urgentes pendentes.',
           security: [{ bearerAuth: [] }],
           response: {
             200: z.object({
@@ -52,15 +51,19 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
         const usuarioId = await request.getCurrentUserId()
         const usuarioCargo = await request.getCurrentUserRole()
 
-        const { cannot, can } = getUserPermissions(usuarioId, usuarioCargo)
+        const { cannot } = getUserPermissions(usuarioId, usuarioCargo)
 
-        if (cannot('visualizar', 'Chamado')) {
+        if (cannot('manage', 'Chamado')) {
           throw new UnauthorizedError(
-            'Você não tem permissão para acessar os chamados.',
+            'Você não tem permissão para visualizar chamados.',
           )
         }
 
         const chamados = await prisma.chamado.findMany({
+          where: {
+            AND: [{ prioridade: 'URGENTE' }, { tecnico: null }],
+          },
+          orderBy: [{ dataAbertura: 'desc' }],
           select: {
             id: true,
             titulo: true,
@@ -85,26 +88,11 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
               },
             },
           },
-          where: {
-            abertoPor: usuarioId,
-          },
-          orderBy: [
-            {
-              dataAbertura: 'desc',
-            },
-            {
-              status: 'asc',
-            },
-          ],
         })
 
-        const chamadosFiltrados = chamados.filter((chamado) =>
-          can('visualizar', chamadoSchema.parse(chamado)),
-        )
-
-        return { chamados: chamadosFiltrados }
+        return { chamados }
       },
     )
 }
 
-export { obterChamadosPorUsuario }
+export { obterChamadosUrgentesPendentes }
