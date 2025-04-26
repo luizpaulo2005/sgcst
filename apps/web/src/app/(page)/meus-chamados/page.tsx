@@ -19,9 +19,7 @@ const Page = async () => {
     )
   }
 
-  return (
-    <ListaChamados idUsuarioAtual={id} chamados={chamados} mostrarUsuario />
-  )
+  return <ListaChamados idUsuarioAtual={id} chamados={chamados} />
 }
 
 export default Page
