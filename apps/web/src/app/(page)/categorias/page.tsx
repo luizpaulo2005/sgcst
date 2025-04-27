@@ -1,8 +1,8 @@
-import { Loader2, Plus } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
 import { obterCategorias } from '@/http/obter-categorias'
 
+import { CriarCategoria } from './criar-categoria'
 import { ListaCategorias } from './lista-categorias'
 
 const Page = async () => {
@@ -28,10 +28,7 @@ const Page = async () => {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Categorias</h1>
-        <Button variant="outline">
-          <Plus />
-          Nova Categoria
-        </Button>
+        <CriarCategoria />
       </div>
       <div className="rounded-md border">
         <ListaCategorias categorias={categorias} />
