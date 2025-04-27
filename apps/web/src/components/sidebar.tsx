@@ -2,6 +2,7 @@ import {
   AppWindow,
   ChartLine,
   Home,
+  Logs,
   Mail,
   MapPin,
   MessageSquare,
@@ -91,31 +92,36 @@ const AppSidebar = () => {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
-        {permissoes && permissoes.can('manage', ['Categoria', 'Local']) && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Configurações</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton isActive={path === '/categorias'} asChild>
-                    <Link href="/categorias">
-                      <Home />
-                      Categorias
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton isActive={path === '/locais'} asChild>
-                    <Link href="/locais">
-                      <MapPin />
-                      Locais
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
+        {permissoes &&
+          (permissoes.can('atualizar', 'Local') ||
+            permissoes.can('atualizar', 'Categoria')) && (
+            <SidebarGroup>
+              <SidebarGroupLabel>Configurações</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton
+                      isActive={path === '/categorias'}
+                      asChild
+                    >
+                      <Link href="/categorias">
+                        <Logs />
+                        Categorias
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton isActive={path === '/locais'} asChild>
+                      <Link href="/locais">
+                        <MapPin />
+                        Locais
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          )}
         {permissoes && permissoes.can('manage', 'Chamado') && (
           <SidebarGroup>
             <SidebarGroupLabel>Dados</SidebarGroupLabel>
