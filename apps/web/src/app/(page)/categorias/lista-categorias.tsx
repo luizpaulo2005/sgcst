@@ -1,6 +1,7 @@
 'use client'
 
 import { Ban, Loader2, Pen, Power } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 
@@ -28,6 +29,19 @@ interface ListaCategoriasProps {
 
 const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
   const permissoes = useAbility()
+
+  if (permissoes.cannot('atualizar', 'Categoria')) {
+    return (
+      <div className="flex h-[calc(100vh-7.1rem)] flex-1 items-center justify-center px-4">
+        <h1 className="text-lg font-bold">
+          Você não tem permissão para visualizar a seção de categorias.{' '}
+          <Link href="/" className="text-muted-foreground hover:underline">
+            Voltar
+          </Link>
+        </h1>
+      </div>
+    )
+  }
 
   const [{ message, success }, handleSubmit, isPending] = useFormState(
     alterarStatusCategoriaAction,
