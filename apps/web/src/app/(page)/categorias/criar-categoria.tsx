@@ -4,6 +4,7 @@ import { AlertTriangle, Loader2, Plus } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
+import { useAbility } from '@/components/providers/permissoes'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,6 +22,7 @@ import { criarCategoriaAction } from './actions'
 
 const CriarCategoria = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const permissoes = useAbility()
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     criarCategoriaAction,
@@ -32,12 +34,14 @@ const CriarCategoria = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          <Plus />
-          Nova Categoria
-        </Button>
-      </DialogTrigger>
+      {permissoes.can('criar', 'Categoria') && (
+        <DialogTrigger asChild>
+          <Button variant="outline">
+            <Plus />
+            Nova Categoria
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Adicionar Categoria</DialogTitle>
