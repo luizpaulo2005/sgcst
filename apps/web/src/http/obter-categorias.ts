@@ -9,7 +9,13 @@ interface ObterCategoriasResponse {
 }
 
 const obterCategorias = async () => {
-  const result = await api.get('categorias').json<ObterCategoriasResponse>()
+  const result = await api
+    .get('categorias', {
+      next: {
+        tags: ['categorias'],
+      },
+    })
+    .json<ObterCategoriasResponse>()
 
   return result
 }
