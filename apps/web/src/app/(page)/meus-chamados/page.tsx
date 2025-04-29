@@ -1,11 +1,18 @@
 import { Loader2 } from 'lucide-react'
 
-import { auth } from '@/auth/auth'
+import { ability, auth } from '@/auth/auth'
+import { CardSemPermissaoPagina } from '@/components/card-sem-permissao-pagina'
 import { obterMeusChamados } from '@/http/obter-meus-chamados'
 
 import { ListaChamados } from '../../../components/lista-chamados'
 
 const Page = async () => {
+  const permissoes = await ability()
+
+  if (permissoes.cannot('meus-chamados', 'Acesso')) {
+    return <CardSemPermissaoPagina />
+  }
+
   const { chamados } = await obterMeusChamados()
   const {
     usuario: { id },

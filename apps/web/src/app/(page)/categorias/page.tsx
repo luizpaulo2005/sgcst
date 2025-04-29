@@ -1,11 +1,19 @@
 import { Loader2 } from 'lucide-react'
 
+import { ability } from '@/auth/auth'
+import { CardSemPermissaoPagina } from '@/components/card-sem-permissao-pagina'
 import { obterCategorias } from '@/http/obter-categorias'
 
 import { CriarCategoria } from './criar-categoria'
 import { ListaCategorias } from './lista-categorias'
 
 const Page = async () => {
+  const permissoes = await ability()
+
+  if (permissoes.cannot('categorias', 'Acesso')) {
+    return <CardSemPermissaoPagina />
+  }
+
   const { categorias } = await obterCategorias()
 
   if (!categorias) {
