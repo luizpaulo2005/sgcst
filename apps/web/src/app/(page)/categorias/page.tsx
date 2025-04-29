@@ -30,9 +30,7 @@ const Page = async () => {
         <h1 className="text-xl font-semibold">Categorias</h1>
         <CriarCategoria />
       </div>
-      <div className="rounded-md border">
-        <ListaCategorias categorias={categorias} />
-      </div>
+      <ListaCategorias categorias={categorias} />
     </div>
   )
 }
