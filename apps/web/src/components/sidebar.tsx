@@ -34,7 +34,7 @@ const AppSidebar = () => {
           <SidebarGroupLabel>Chamados</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {permissoes && permissoes.can('manage', 'Chamado') && (
+              {permissoes.can('painel', 'Acesso') && (
                 <SidebarMenuItem>
                   <SidebarMenuButton isActive={path === '/'} asChild>
                     <Link href="/">
@@ -44,15 +44,20 @@ const AppSidebar = () => {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
-              <SidebarMenuItem>
-                <SidebarMenuButton isActive={path === '/meus-chamados'} asChild>
-                  <Link href="/meus-chamados">
-                    <MessageSquare />
-                    Meus chamados
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              {permissoes && permissoes.can('manage', 'Chamado') && (
+              {permissoes.can('meus-chamados', 'Acesso') && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    isActive={path === '/meus-chamados'}
+                    asChild
+                  >
+                    <Link href="/meus-chamados">
+                      <MessageSquare />
+                      Meus chamados
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
+              {permissoes.can('chamados', 'Acesso') && (
                 <SidebarMenuItem>
                   <SidebarMenuButton isActive={path === '/chamados'} asChild>
                     <Link href="/chamados">
@@ -65,12 +70,13 @@ const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        {permissoes && permissoes.can('manage', 'Usuario') && (
+        {(permissoes.can('usuarios', 'Acesso') ||
+          permissoes.can('convites', 'Acesso')) && (
           <SidebarGroup>
             <SidebarGroupLabel>Usuários</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                <>
+                {permissoes.can('usuarios', 'Acesso') && (
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={path === '/usuarios'} asChild>
                       <Link href="/usuarios">
@@ -79,6 +85,8 @@ const AppSidebar = () => {
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+                )}
+                {permissoes.can('convites', 'Acesso') && (
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={path === '/convites'} asChild>
                       <Link href="/convites">
@@ -87,18 +95,18 @@ const AppSidebar = () => {
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                </>
+                )}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         )}
-        {permissoes &&
-          (permissoes.can('atualizar', 'Local') ||
-            permissoes.can('atualizar', 'Categoria')) && (
-            <SidebarGroup>
-              <SidebarGroupLabel>Configurações</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
+        {(permissoes.can('locais', 'Acesso') ||
+          permissoes.can('categorias', 'Acesso')) && (
+          <SidebarGroup>
+            <SidebarGroupLabel>Configurações</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {permissoes.can('categorias', 'Acesso') && (
                   <SidebarMenuItem>
                     <SidebarMenuButton
                       isActive={path === '/categorias'}
@@ -110,6 +118,8 @@ const AppSidebar = () => {
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+                )}
+                {permissoes.can('locais', 'Acesso') && (
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={path === '/locais'} asChild>
                       <Link href="/locais">
@@ -118,11 +128,12 @@ const AppSidebar = () => {
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          )}
-        {permissoes && permissoes.can('manage', 'Chamado') && (
+                )}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
+        {permissoes.can('graficos', 'Acesso') && (
           <SidebarGroup>
             <SidebarGroupLabel>Dados</SidebarGroupLabel>
             <SidebarGroupContent>
