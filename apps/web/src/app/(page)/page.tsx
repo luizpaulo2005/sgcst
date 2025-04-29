@@ -6,7 +6,7 @@ import { useAbility } from '@/components/providers/permissoes'
 const App = () => {
   const permissoes = useAbility()
 
-  if (permissoes.cannot('manage', 'Chamado')) {
+  if (permissoes.cannot('painel', 'Acesso')) {
     return redirect('/meus-chamados')
   }
 
