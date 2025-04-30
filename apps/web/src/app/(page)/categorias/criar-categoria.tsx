@@ -50,7 +50,7 @@ const CriarCategoria = () => {
           {success === false && message && (
             <Alert variant="destructive">
               <AlertTriangle className="size-4" />
-              <AlertTitle>Erro ao realizar registro!</AlertTitle>
+              <AlertTitle>Erro ao adicionar categoria!</AlertTitle>
               <AlertDescription>
                 <p>{message}</p>
               </AlertDescription>
