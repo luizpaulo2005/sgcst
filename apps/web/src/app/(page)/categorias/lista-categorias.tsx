@@ -7,7 +7,6 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Loader2,
-  Pen,
   Power,
   Search,
   Trash,
@@ -39,6 +38,7 @@ import { useFormState } from '@/hooks/use-form-state'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 import { alterarStatusCategoriaAction } from './actions'
+import { EditarCategoria } from './editar-categoria'
 
 interface ListaCategoriasProps {
   categorias: {
@@ -194,10 +194,7 @@ const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
                 )}
                 <TableCell className="w-40 space-x-2" align="right">
                   {permissoes.can('atualizar', 'Categoria') && (
-                    <Button size="sm">
-                      <Pen />
-                      Editar
-                    </Button>
+                    <EditarCategoria categoria={categoria} />
                   )}
                   {permissoes.can('cancelar', 'Categoria') && (
                     <form onSubmit={handleSubmit} className="inline">

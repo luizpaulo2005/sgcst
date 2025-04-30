@@ -6,6 +6,7 @@ import { z } from 'zod'
 
 import { alterarStatusCategoria } from '@/http/alterar-status-categoria'
 import { criarCategoria } from '@/http/criar-categoria'
+import { editarCategoria } from '@/http/editar-categoria'
 
 const alterarStatusCategoriaSchema = z.object({
   id: z.string(),
@@ -109,4 +110,59 @@ const criarCategoriaAction = async (data: FormData) => {
   }
 }
 
-export { alterarStatusCategoriaAction, criarCategoriaAction }
+const editarCategoriaSchema = z.object({
+  id: z.string().nonempty({ message: 'Campo obrigatório' }),
+  descricao: z.string().nonempty({ message: 'Campo obrigatório' }),
+})
+
+const editarCategoriaAction = async (data: FormData) => {
+  const result = editarCategoriaSchema.safeParse(Object.fromEntries(data))
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors
+
+    return {
+      success: false,
+      message: null,
+      errors,
+    }
+  }
+
+  const { id, descricao } = result.data
+
+  try {
+    await editarCategoria({ id, descricao })
+
+    revalidateTag('categorias')
+
+    return {
+      success: true,
+      message: null,
+      errors: null,
+    }
+  } catch (error) {
+    if (error instanceof HTTPError) {
+      const { message } = await error.response.json()
+
+      return {
+        success: false,
+        message,
+        errors: null,
+      }
+    }
+
+    console.error(error)
+
+    return {
+      success: false,
+      message: 'Erro ao editar categoria',
+      errors: null,
+    }
+  }
+}
+
+export {
+  alterarStatusCategoriaAction,
+  criarCategoriaAction,
+  editarCategoriaAction,
+}
