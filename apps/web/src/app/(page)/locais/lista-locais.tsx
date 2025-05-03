@@ -1,7 +1,8 @@
 'use client'
 
-import { Ban, Pen, Power, Search, Trash } from 'lucide-react'
+import { Ban, Loader2, Power, Search, Trash } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { Paginacao } from '@/components/paginacao'
 import { useAbility } from '@/components/providers/permissoes'
@@ -22,7 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useFormState } from '@/hooks/use-form-state'
 import { useIsMobile } from '@/hooks/use-mobile'
+
+import { alterarStatusLocalAction } from './actions'
+import { EditarLocal } from './editar-local'
 
 interface ListaLocaisProps {
   locais: Array<{
@@ -66,6 +71,19 @@ const ListaLocais = ({ locais }: ListaLocaisProps) => {
   useEffect(() => {
     setPaginaAtual(1)
   }, [itensPorPagina, statusFiltro, valorBusca])
+
+  const [{ message, success }, handleSubmit, isPending] = useFormState(
+    alterarStatusLocalAction,
+    () => {
+      toast.success('Status do local alterado com sucesso')
+    },
+  )
+
+  useEffect(() => {
+    if (!success && message) {
+      toast.error(message)
+    }
+  }, [isPending])
 
   return (
     <div className="space-y-2">
@@ -137,18 +155,29 @@ const ListaLocais = ({ locais }: ListaLocaisProps) => {
                   </TableCell>
                 )}
                 <TableCell className="w-40 space-x-2" align="right">
-                  <Button size="sm">
-                    <Pen />
-                    Editar
-                  </Button>
-                  <Button
-                    type="submit"
-                    size="sm"
-                    variant={local.ativo ? 'destructive' : 'secondary'}
-                  >
-                    {local.ativo ? <Ban /> : <Power />}
-                    {local.ativo ? 'Inativar' : 'Ativar'}
-                  </Button>
+                  {permissoes.can('atualizar', 'Local') && (
+                    <EditarLocal local={local} />
+                  )}
+                  {permissoes.can('cancelar', 'Local') && (
+                    <form onSubmit={handleSubmit} className="inline">
+                      <input type="hidden" name="id" value={local.id} />
+                      <Button
+                        disabled={isPending}
+                        type="submit"
+                        size="sm"
+                        variant={local.ativo ? 'destructive' : 'secondary'}
+                      >
+                        {isPending ? (
+                          <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                          <>
+                            {local.ativo ? <Ban /> : <Power />}
+                            {local.ativo ? 'Inativar' : 'Ativar'}
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
