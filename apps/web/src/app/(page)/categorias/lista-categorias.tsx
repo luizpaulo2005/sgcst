@@ -30,11 +30,11 @@ import { alterarStatusCategoriaAction } from './actions'
 import { EditarCategoria } from './editar-categoria'
 
 interface ListaCategoriasProps {
-  categorias: {
+  categorias: Array<{
     id: string
     descricao: string
     ativo?: boolean
-  }[]
+  }>
 }
 
 const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
@@ -165,6 +165,7 @@ const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
                     <form onSubmit={handleSubmit} className="inline">
                       <input type="hidden" name="id" value={categoria.id} />
                       <Button
+                        disabled={isPending}
                         type="submit"
                         size="sm"
                         variant={categoria.ativo ? 'destructive' : 'secondary'}
