@@ -68,7 +68,7 @@ const CriarLocal = () => {
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="avatarUrl">Nome do Local</Label>
+            <Label htmlFor="avatarUrl">Logo do Local</Label>
             <Input
               id="avatarUrl"
               name="avatarUrl"
