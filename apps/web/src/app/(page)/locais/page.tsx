@@ -4,6 +4,7 @@ import { ability } from '@/auth/auth'
 import { CardSemPermissaoPagina } from '@/components/card-sem-permissao-pagina'
 import { obterLocais } from '@/http/obter-locais'
 
+import { CriarLocal } from './criar-local'
 import { ListaLocais } from './lista-locais'
 
 const Page = async () => {
@@ -35,7 +36,7 @@ const Page = async () => {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Locais</h1>
-        {/* <CriarLocal /> */}
+        <CriarLocal />
       </div>
       <ListaLocais locais={locais} />
     </div>

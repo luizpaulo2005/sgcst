@@ -21,7 +21,7 @@ const criarLocal = async (app: FastifyInstance) => {
           security: [{ bearerAuth: [] }],
           body: z.object({
             nome: z.string(),
-            avatarUrl: z.string().url().nullish(),
+            avatarUrl: z.string().url().nullable(),
           }),
           response: {
             201: z.object({
