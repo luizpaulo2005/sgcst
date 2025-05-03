@@ -25,7 +25,7 @@ const editarLocal = async (app: FastifyInstance) => {
           }),
           body: z.object({
             nome: z.string(),
-            avatarUrl: z.string().url().nullish(),
+            avatarUrl: z.string().url().nullable(),
           }),
           response: {
             204: z.null(),
@@ -55,6 +55,8 @@ const editarLocal = async (app: FastifyInstance) => {
         if (!local) {
           throw new BadRequestError('Local não encontrado.')
         }
+
+        console.log(request.body)
 
         const { nome, avatarUrl } = request.body
 
