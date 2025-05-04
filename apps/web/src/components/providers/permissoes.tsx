@@ -22,6 +22,7 @@ const PermissoesProvider = ({
   const ability = useMemo(() => createMongoAbility(permissoes), [permissoes])
 
   return (
+    // @ts-expect-error this is a valid jsx provider
     <AbilityContext.Provider value={ability}>
       {children}
     </AbilityContext.Provider>
