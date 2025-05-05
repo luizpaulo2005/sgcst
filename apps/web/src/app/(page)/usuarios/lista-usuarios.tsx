@@ -1,7 +1,8 @@
 'use client'
 
-import { Ban, Pen, Power, Search, Trash } from 'lucide-react'
+import { Ban, Loader2, Power, Search, Trash } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { obterIniciais } from '@/components/header/perfil/dropdown-perfil'
 import { Paginacao } from '@/components/paginacao'
@@ -23,9 +24,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useFormState } from '@/hooks/use-form-state'
 import { useIsMobile } from '@/hooks/use-mobile'
 
+import { alterarStatusUsuarioAction } from './actions'
+
 interface ListaUsuariosProps {
+  usuarioAtualId: string
   usuarios: Array<{
     id: string
     nome: string | null
@@ -36,7 +41,7 @@ interface ListaUsuariosProps {
   }>
 }
 
-const ListaUsuarios = ({ usuarios }: ListaUsuariosProps) => {
+const ListaUsuarios = ({ usuarios, usuarioAtualId }: ListaUsuariosProps) => {
   const [statusFiltro, setStatusFiltro] = useState('todos')
   const [cargoFiltro, setCargoFiltro] = useState('todos')
   const [valorBusca, setValorBusca] = useState('')
@@ -79,6 +84,24 @@ const ListaUsuarios = ({ usuarios }: ListaUsuariosProps) => {
   useEffect(() => {
     setPaginaAtual(1)
   }, [itensPorPagina, statusFiltro, cargoFiltro, valorBusca])
+
+  const [{ message, success }, handleSubmit, isPending] = useFormState(
+    alterarStatusUsuarioAction,
+    () => {
+      setValorBusca('')
+      setInputBusca('')
+      setStatusFiltro('todos')
+      setCargoFiltro('todos')
+      setPaginaAtual(1)
+      toast.success('Status do usuário alterado com sucesso!')
+    },
+  )
+
+  useEffect(() => {
+    if (!success && message) {
+      toast.error(message)
+    }
+  }, [isPending])
 
   return (
     <div className="space-y-2">
@@ -177,18 +200,24 @@ const ListaUsuarios = ({ usuarios }: ListaUsuariosProps) => {
                   {usuario.ativo ? 'Ativo' : 'Inativo'}
                 </TableCell>
                 <TableCell className="w-40 space-x-2" align="right">
-                  <Button size="sm">
-                    <Pen />
-                    Editar
-                  </Button>
-                  <Button
-                    type="submit"
-                    size="sm"
-                    variant={usuario.ativo ? 'destructive' : 'secondary'}
-                  >
-                    {usuario.ativo ? <Ban /> : <Power />}
-                    {usuario.ativo ? 'Inativar' : 'Ativar'}
-                  </Button>
+                  <form onSubmit={handleSubmit} className="inline">
+                    <input type="hidden" name="id" value={usuario.id} />
+                    <Button
+                      disabled={isPending || usuario.id === usuarioAtualId}
+                      type="submit"
+                      size="sm"
+                      variant={usuario.ativo ? 'destructive' : 'secondary'}
+                    >
+                      {isPending ? (
+                        <Loader2 className="size-4 animate-spin" />
+                      ) : (
+                        <>
+                          {usuario.ativo ? <Ban /> : <Power />}
+                          {usuario.ativo ? 'Inativar' : 'Ativar'}
+                        </>
+                      )}
+                    </Button>
+                  </form>
                 </TableCell>
               </TableRow>
             ))}
