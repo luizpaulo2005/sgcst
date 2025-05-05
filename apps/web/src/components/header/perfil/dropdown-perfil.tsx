@@ -85,4 +85,4 @@ const DropdownPerfil = ({ usuario }: DropdownPerfilProps) => {
   )
 }
 
-export { DropdownPerfil }
+export { DropdownPerfil, obterIniciais }
