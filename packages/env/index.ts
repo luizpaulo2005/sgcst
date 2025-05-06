@@ -5,6 +5,7 @@ const env = createEnv({
   server: {
     SERVER_PORT: z.coerce.number().default(3333),
     DATABASE_URL: z.string().url(),
+    DIRECT_URL: z.string().url(),
 
     JWT_SECRET: z.string(),
 
@@ -26,6 +27,7 @@ const env = createEnv({
   runtimeEnv: {
     SERVER_PORT: process.env.SERVER_PORT,
     DATABASE_URL: process.env.DATABASE_URL,
+    DIRECT_URL: process.env.DIRECT_URL,
     JWT_SECRET: process.env.JWT_SECRET,
     GOOGLE_OAUTH_CLIENT_ID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     GOOGLE_OAUTH_CLIENT_SECRET: process.env.GOOGLE_OAUTH_CLIENT_SECRET,

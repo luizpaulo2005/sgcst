@@ -57,6 +57,7 @@ Table locais {
 
 Table chamados {
   id String [pk]
+  idPublico Int [increment, unique, not null]
   titulo String [not null]
   descricao String [not null]
   execucao String
