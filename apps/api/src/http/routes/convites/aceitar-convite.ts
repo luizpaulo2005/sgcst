@@ -35,22 +35,29 @@ const aceitarConvite = async (app: FastifyInstance) => {
         throw new BadRequestError('Convite não encontrado.')
       }
 
-      const usuario = await prisma.usuario.findUnique({
-        where: {
-          email: convite.email,
-        },
-      })
+      // Remover o comentário abaixo permite que um usuário crie convites para usuários já existentes
+      // const usuario = await prisma.usuario.findUnique({
+      //   where: {
+      //     email: convite.email,
+      //   },
+      // })
 
-      if (usuario) {
-        throw new BadRequestError(
-          'Usuário com esse e-mail já existe, não é possível aceitar o convite.',
-        )
-      }
+      // if (usuario) {
+      //   throw new BadRequestError(
+      //     'Usuário com esse e-mail já existe, não é possível aceitar o convite.',
+      //   )
+      // }
 
       await prisma.$transaction([
-        prisma.usuario.create({
-          data: {
+        prisma.usuario.upsert({
+          where: {
             email: convite.email,
+          },
+          create: {
+            email: convite.email,
+            cargo: convite.cargo,
+          },
+          update: {
             cargo: convite.cargo,
           },
         }),

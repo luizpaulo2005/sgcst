@@ -59,18 +59,24 @@ const criarConvite = async (app: FastifyInstance) => {
             'Já existe um convite para esse e-mail, revogue-o antes de criar um novo convite.',
           )
         }
-
         const usuario = await prisma.usuario.findUnique({
           where: {
             email,
           },
         })
 
-        if (usuario) {
+        if (usuario && usuario.cargo === cargo) {
           throw new BadRequestError(
-            'Esse e-mail já está cadastrado, utilize outro e-mail.',
+            'O cargo informado no convite é o mesmo cargo do usuário.',
           )
         }
+
+        // Remover o comentário abaixo permite que um usuário crie convites para usuários já existentes
+        // if (usuario) {
+        //   throw new BadRequestError(
+        //     'Esse e-mail já está cadastrado, utilize outro e-mail.',
+        //   )
+        // }
 
         const convite = await prisma.convite.create({
           data: {
