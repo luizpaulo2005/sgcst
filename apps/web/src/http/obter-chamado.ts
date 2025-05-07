@@ -7,6 +7,7 @@ interface ObterChamadoRequest {
 interface ObterChamadoResponse {
   chamado: {
     id: string
+    idPublico: number
     titulo: string
     descricao: string
     execucao: string | null

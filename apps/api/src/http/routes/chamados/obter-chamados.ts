@@ -24,10 +24,12 @@ const obterChamados = async (app: FastifyInstance) => {
             200: z.object({
               chamados: z.array(
                 z.object({
+                  id: z.string(),
                   idPublico: z.number().int(),
                   titulo: z.string(),
                   status: z.string(),
                   prioridade: z.string(),
+                  abertoPor: z.string(),
                   usuario: z.object({
                     id: z.string(),
                     nome: z.string().nullable(),
@@ -56,11 +58,13 @@ const obterChamados = async (app: FastifyInstance) => {
         const chamados = await prisma.chamado.findMany({
           orderBy: [{ dataAbertura: 'desc' }],
           select: {
+            id: true,
             idPublico: true,
             titulo: true,
             status: true,
             prioridade: true,
             dataAbertura: true,
+            abertoPor: true,
             usuario: {
               select: {
                 id: true,

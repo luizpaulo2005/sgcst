@@ -49,7 +49,7 @@ const Paginacao = ({
   return (
     <TableFooter className="bg-background">
       <TableRow>
-        <TableCell colSpan={5} className="p-2">
+        <TableCell colSpan={6} className="p-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               Mostrando

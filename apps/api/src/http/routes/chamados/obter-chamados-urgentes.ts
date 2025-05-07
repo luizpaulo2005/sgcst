@@ -24,6 +24,7 @@ const obterChamadosUrgentesPendentes = async (app: FastifyInstance) => {
               chamados: z.array(
                 z.object({
                   id: z.string(),
+                  idPublico: z.number(),
                   titulo: z.string(),
                   status: z.string(),
                   prioridade: z.string(),
@@ -66,6 +67,7 @@ const obterChamadosUrgentesPendentes = async (app: FastifyInstance) => {
           orderBy: [{ dataAbertura: 'desc' }],
           select: {
             id: true,
+            idPublico: true,
             titulo: true,
             status: true,
             dataAbertura: true,

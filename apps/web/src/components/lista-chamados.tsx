@@ -4,6 +4,7 @@ import { CardChamado } from './card-chamado'
 
 interface Chamado {
   id: string
+  idPublico: number
   titulo: string
   status:
     | 'NOVO'

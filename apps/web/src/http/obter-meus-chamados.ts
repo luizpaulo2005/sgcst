@@ -3,6 +3,7 @@ import { api } from './api-client'
 interface ObterMeusChamadosResponse {
   chamados: {
     id: string
+    idPublico: number
     titulo: string
     status:
       | 'NOVO'

@@ -22,7 +22,7 @@ const obterChamado = async (app: FastifyInstance) => {
           summary: 'Obter Chamado por ID',
           security: [{ bearerAuth: [] }],
           params: z.object({
-            id: z.string().uuid(),
+            id: z.coerce.number().int(),
           }),
           response: {
             200: z.object({
@@ -102,7 +102,7 @@ const obterChamado = async (app: FastifyInstance) => {
 
         const chamado = await prisma.chamado.findUnique({
           where: {
-            id,
+            idPublico: id,
           },
           include: {
             usuario: {

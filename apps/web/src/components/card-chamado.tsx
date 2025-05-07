@@ -16,6 +16,7 @@ interface CardChamadoProps {
   mostrarUsuario?: boolean
   chamado: {
     id: string
+    idPublico: number
     titulo: string
     status:
       | 'NOVO'
@@ -92,7 +93,7 @@ const CardChamado = ({
       <div className="flex items-center justify-between gap-2">
         <div className="min-w-0 flex-1">
           <Link
-            href={`/chamados/${chamado.id}`}
+            href={`/chamados/${chamado.idPublico}`}
             data-cancelado={chamado.status === 'CANCELADO'}
             className="visited:text-secondary-foreground data-[cancelado=true]:text-muted-foreground block truncate text-xl font-semibold hover:underline data-[cancelado=true]:line-through"
           >
