@@ -1,7 +1,8 @@
 'use client'
 
-import { Search, Trash, X } from 'lucide-react'
+import { Loader2, Search, Trash, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { Paginacao } from '@/components/paginacao'
 import { Button } from '@/components/ui/button'
@@ -14,7 +15,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useFormState } from '@/hooks/use-form-state'
 import { useIsMobile } from '@/hooks/use-mobile'
+
+import { revogarConviteAction } from './actions'
 
 interface ListaConvitesProps {
   convites: Array<{
@@ -52,6 +56,19 @@ const ListaConvites = ({ convites }: ListaConvitesProps) => {
   useEffect(() => {
     setPaginaAtual(1)
   }, [itensPorPagina, valorBusca])
+
+  const [{ message, success }, handleSubmit, isPending] = useFormState(
+    revogarConviteAction,
+    () => {
+      toast.success('Convite revogado com sucesso')
+    },
+  )
+
+  useEffect(() => {
+    if (!success && message) {
+      toast.error(message)
+    }
+  }, [isPending])
 
   return (
     <div className="space-y-2">
@@ -104,10 +121,19 @@ const ListaConvites = ({ convites }: ListaConvitesProps) => {
                 <TableCell>{convite.email}</TableCell>
                 <TableCell>{convite.cargo}</TableCell>
                 <TableCell align="right">
-                  <Button variant="destructive">
-                    <X />
-                    Revogar convite
-                  </Button>
+                  <form onSubmit={handleSubmit} className="inline">
+                    <input type="hidden" name="id" value={convite.id} />
+                    <Button disabled={isPending} variant="destructive">
+                      {isPending ? (
+                        <Loader2 className="size-4 animate-spin" />
+                      ) : (
+                        <>
+                          <X />
+                          Revogar convite
+                        </>
+                      )}
+                    </Button>
+                  </form>
                 </TableCell>
               </TableRow>
             ))}
