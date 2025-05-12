@@ -57,7 +57,7 @@ const CriarConvite = () => {
           {success === false && message && (
             <Alert variant="destructive">
               <AlertTriangle className="size-4" />
-              <AlertTitle>Erro ao adicionar categoria!</AlertTitle>
+              <AlertTitle>Erro ao criar convite!</AlertTitle>
               <AlertDescription>
                 <p>{message}</p>
               </AlertDescription>
