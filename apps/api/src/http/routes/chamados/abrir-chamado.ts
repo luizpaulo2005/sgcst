@@ -22,7 +22,7 @@ const abrirChamado = async (app: FastifyInstance) => {
           body: z.object({
             titulo: z.string(),
             descricao: z.string(),
-            categoriaId: z.string().uuid().optional(),
+            categoriaId: z.string().nullable(),
             localId: z.string().uuid(),
             prioridade: z
               .enum(['BAIXA', 'MEDIA', 'ALTA', 'URGENTE'])

@@ -5,8 +5,13 @@ import { SidebarTrigger } from '../ui/sidebar'
 import { Perfil } from './perfil/perfil'
 
 interface HeaderProps {
-  categorias: Array<{ id: string; descricao: string }>
-  locais: Array<{ id: string; nome: string; avatarUrl?: string | null }>
+  categorias: Array<{ id: string; descricao: string; ativo?: boolean }>
+  locais: Array<{
+    id: string
+    nome: string
+    avatarUrl?: string | null
+    ativo?: boolean
+  }>
 }
 
 const Header = ({ categorias, locais }: HeaderProps) => {
