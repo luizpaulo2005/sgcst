@@ -130,11 +130,11 @@ model Chamado {
   usuario   Usuario @relation(fields: [abertoPor], references: [id])
   abertoPor String  @map("aberto_por")
 
-  categoria   Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId String
+  categoria   Categoria? @relation(fields: [categoriaId], references: [id])
+  categoriaId String?
 
-  local   Local?  @relation(fields: [localId], references: [id])
-  localId String?
+  local   Local  @relation(fields: [localId], references: [id])
+  localId String
 
   comentarios Comentario[]
   tecnico     TecnicoChamado?

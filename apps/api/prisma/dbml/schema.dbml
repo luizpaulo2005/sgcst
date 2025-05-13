@@ -70,10 +70,10 @@ Table chamados {
   fechadoPor String
   usuario usuarios [not null]
   abertoPor String [not null]
-  categoria categorias [not null]
-  categoriaId String [not null]
-  local locais
-  localId String
+  categoria categorias
+  categoriaId String
+  local locais [not null]
+  localId String [not null]
   comentarios comentarios [not null]
   tecnico tecnico_chamado
   logs logs_chamados [not null]

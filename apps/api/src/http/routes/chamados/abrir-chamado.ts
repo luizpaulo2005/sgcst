@@ -22,11 +22,11 @@ const abrirChamado = async (app: FastifyInstance) => {
           body: z.object({
             titulo: z.string(),
             descricao: z.string(),
-            categoriaId: z.string().uuid(),
-            localId: z.string().uuid().optional(),
+            categoriaId: z.string().uuid().optional(),
+            localId: z.string().uuid(),
             prioridade: z
               .enum(['BAIXA', 'MEDIA', 'ALTA', 'URGENTE'])
-              .optional(),
+              .default('BAIXA'),
           }),
           response: {
             201: z.object({
