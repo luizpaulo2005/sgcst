@@ -127,7 +127,6 @@ const ListaLocais = ({ locais }: ListaLocaisProps) => {
         <Table>
           <TableHeader>
             <TableRow>
-              {permissoes.can('manage', 'Local') && <TableHead>ID</TableHead>}
               <TableHead>Nome</TableHead>
               {permissoes.can('manage', 'Local') && (
                 <TableHead>Status</TableHead>
@@ -145,9 +144,6 @@ const ListaLocais = ({ locais }: ListaLocaisProps) => {
             )}
             {locaisPaginados.map((local) => (
               <TableRow key={local.id}>
-                {permissoes.can('manage', 'Local') && (
-                  <TableCell className="w-80">{local.id}</TableCell>
-                )}
                 <TableCell className="">{local.nome}</TableCell>
                 {permissoes.can('manage', 'Local') && (
                   <TableCell className="w-40">

@@ -128,9 +128,6 @@ const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
         <Table>
           <TableHeader>
             <TableRow>
-              {permissoes.can('manage', 'Categoria') && (
-                <TableHead>ID</TableHead>
-              )}
               <TableHead>Descrição</TableHead>
               {permissoes.can('manage', 'Categoria') && (
                 <TableHead>Status</TableHead>
@@ -148,9 +145,6 @@ const ListaCategorias = ({ categorias }: ListaCategoriasProps) => {
             )}
             {categoriasPaginadas.map((categoria) => (
               <TableRow key={categoria.id}>
-                {permissoes.can('manage', 'Categoria') && (
-                  <TableCell className="w-80">{categoria.id}</TableCell>
-                )}
                 <TableCell className="">{categoria.descricao}</TableCell>
                 {permissoes.can('manage', 'Categoria') && (
                   <TableCell className="w-40">

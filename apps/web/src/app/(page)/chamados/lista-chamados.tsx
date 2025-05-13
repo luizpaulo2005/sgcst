@@ -125,10 +125,6 @@ const ListaChamados = ({ chamados }: ListaChamadosProps) => {
     setPaginaAtual(1)
   }, [itensPorPagina, statusFiltro, idFiltro, tituloFiltro])
 
-  console.log(chamados)
-  console.log(chamadosFiltrados)
-  console.log(chamadosPaginados)
-
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
