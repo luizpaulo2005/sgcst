@@ -92,3 +92,8 @@ Este repositorio contém o código fonte de um sistema para gerenciamento de cha
 | Listar categorias | ✅ | ⚠️ | ❌ |
 | Listar locais | ✅ | ⚠️ | ❌ |
 | Listar técnicos | ✅ | ⚠️ | ❌ |
+
+## 📄 Licença
+
+Este projeto é distribuído sob uma licença de uso acadêmico. **Uso comercial é proibido**.  
+Leia o arquivo [LICENSE](./LICENSE) para mais detalhes.
