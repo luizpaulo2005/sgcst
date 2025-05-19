@@ -31,14 +31,14 @@ const obterChamadosPorUsuario = async (app: FastifyInstance) => {
                   prioridade: z.string(),
                   dataAbertura: z.date(),
                   abertoPor: z.string(),
-                  categoria: z.object({
-                    descricao: z.string(),
-                  }),
-                  local: z
+                  categoria: z
                     .object({
-                      nome: z.string(),
+                      descricao: z.string(),
                     })
                     .nullable(),
+                  local: z.object({
+                    nome: z.string(),
+                  }),
                   usuario: z.object({
                     nome: z.string().nullable(),
                     email: z.string(),

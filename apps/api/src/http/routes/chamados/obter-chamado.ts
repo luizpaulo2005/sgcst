@@ -39,15 +39,15 @@ const obterChamado = async (app: FastifyInstance) => {
                 atualizadoEm: z.date(),
                 fechadoPor: z.string().nullable(),
                 abertoPor: z.string(),
-                categoriaId: z.string(),
+                categoriaId: z.string().nullable(),
                 localId: z.string().nullable(),
                 usuario: z.object({
                   nome: z.string().nullable(),
                   email: z.string(),
                   avatarUrl: z.string().url().nullable(),
                 }),
-                categoria: z.object({ descricao: z.string() }),
-                local: z.object({ nome: z.string() }).nullable(),
+                categoria: z.object({ descricao: z.string() }).nullable(),
+                local: z.object({ nome: z.string() }),
                 tecnico: z
                   .object({
                     usuario: z.object({
