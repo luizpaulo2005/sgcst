@@ -1,6 +1,10 @@
+'use client'
+
 import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 
 import { CardChamado } from './card-chamado'
+import { Button } from './ui/button'
 
 interface Chamado {
   id: string
@@ -14,15 +18,15 @@ interface Chamado {
     | 'VALIDANDO'
     | 'FECHADO'
     | 'CANCELADO'
-  dataAbertura: string
+  dataAbertura: Date
   abertoPor: string
   prioridade: 'BAIXA' | 'MEDIA' | 'ALTA' | 'URGENTE'
   categoria: {
     descricao: string
-  }
+  } | null
   local: {
     nome: string
-  } | null
+  }
   usuario: {
     nome: string | null
     email: string
@@ -47,6 +51,8 @@ const ListaChamados = ({
   mostrarUsuario,
   chamados,
 }: ListaChamadoProps) => {
+  const [mostrarMais, setMostrarMais] = useState(false)
+
   if (!chamados) {
     return (
       <div className="flex flex-1 items-center justify-center">
@@ -63,18 +69,31 @@ const ListaChamados = ({
     )
   }
 
+  const chamadosExibidos = mostrarMais ? chamados : chamados.slice(0, 4)
+
   return (
-    <div className="flex flex-wrap items-stretch gap-2">
-      {chamados.map((chamado) => {
-        return (
-          <CardChamado
-            key={chamado.id}
-            chamado={chamado}
-            mostrarUsuario={mostrarUsuario}
-            idUsuarioAtual={idUsuarioAtual}
-          />
-        )
-      })}
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap items-stretch gap-2">
+        {chamadosExibidos.map((chamado) => {
+          return (
+            <CardChamado
+              key={chamado.id}
+              chamado={chamado}
+              mostrarUsuario={mostrarUsuario}
+              idUsuarioAtual={idUsuarioAtual}
+            />
+          )
+        })}
+      </div>
+      {chamados.length > 4 && (
+        <Button
+          className="-mr-2 self-end"
+          variant="link"
+          onClick={() => setMostrarMais(!mostrarMais)}
+        >
+          Mostrar {mostrarMais ? 'menos' : 'mais'}
+        </Button>
+      )}
     </div>
   )
 }

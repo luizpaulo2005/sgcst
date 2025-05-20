@@ -27,7 +27,8 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile'
 import { dayjs } from '@/lib/dayjs'
 
-interface ListaChamadosProps {
+interface TabelaChamadosProps {
+  mostrarUsuario?: boolean
   chamados: Array<{
     id: string
     idPublico: number
@@ -77,7 +78,10 @@ const getClassesPrioridade = (prioridade: string) => {
   }
 }
 
-const ListaChamados = ({ chamados }: ListaChamadosProps) => {
+const TabelaChamados = ({
+  chamados,
+  mostrarUsuario = false,
+}: TabelaChamadosProps) => {
   const isMobile = useIsMobile()
 
   const [statusFiltro, setStatusFiltro] = useState('todos')
@@ -199,7 +203,7 @@ const ListaChamados = ({ chamados }: ListaChamadosProps) => {
               <TableHead className="min-w-[130px] whitespace-nowrap">
                 Data de Abertura
               </TableHead>
-              <TableHead>Aberto Por</TableHead>
+              {mostrarUsuario && <TableHead>Aberto Por</TableHead>}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -228,28 +232,30 @@ const ListaChamados = ({ chamados }: ListaChamadosProps) => {
                     </div>
                   </TableCell>
                   <TableCell>{dayjs().to(chamado.dataAbertura)}</TableCell>
-                  <TableCell className="w-full">
-                    <div className="flex items-center gap-2">
-                      <Avatar className="size-6 shrink-0">
-                        {chamado.usuario.avatarUrl && (
-                          <AvatarImage src={chamado.usuario.avatarUrl} />
-                        )}
-                        <AvatarFallback>
-                          {obterIniciais(
-                            chamado.usuario.nome ?? chamado.usuario.email,
+                  {mostrarUsuario && (
+                    <TableCell className="w-full">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="size-6 shrink-0">
+                          {chamado.usuario.avatarUrl && (
+                            <AvatarImage src={chamado.usuario.avatarUrl} />
                           )}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col gap-px break-words whitespace-normal md:truncate">
-                        <p className="font-semibold">
-                          {chamado.usuario.nome ?? 'Nome não informado'}
-                        </p>
-                        <p className="text-muted-foreground text-xs">
-                          {chamado.usuario.email}
-                        </p>
+                          <AvatarFallback>
+                            {obterIniciais(
+                              chamado.usuario.nome ?? chamado.usuario.email,
+                            )}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col gap-px break-words whitespace-normal md:truncate">
+                          <p className="font-semibold">
+                            {chamado.usuario.nome ?? 'Nome não informado'}
+                          </p>
+                          <p className="text-muted-foreground text-xs">
+                            {chamado.usuario.email}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </TableCell>
+                    </TableCell>
+                  )}
                 </TableRow>
               )
             })}
@@ -267,4 +273,4 @@ const ListaChamados = ({ chamados }: ListaChamadosProps) => {
   )
 }
 
-export { ListaChamados }
+export { TabelaChamados }

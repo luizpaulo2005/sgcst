@@ -26,15 +26,15 @@ interface CardChamadoProps {
       | 'VALIDANDO'
       | 'FECHADO'
       | 'CANCELADO'
-    dataAbertura: string
+    dataAbertura: Date
     abertoPor: string
     prioridade: 'BAIXA' | 'MEDIA' | 'ALTA' | 'URGENTE'
     categoria: {
       descricao: string
-    }
+    } | null
     local: {
       nome: string
-    } | null
+    }
     usuario: {
       nome: string | null
       email: string
@@ -107,7 +107,11 @@ const CardChamado = ({
         </div>
       </div>
       <div className="text-sm">
-        <p>{chamado.categoria.descricao}</p>
+        <p>
+          {chamado.categoria?.descricao
+            ? chamado.categoria.descricao
+            : 'Não informado'}
+        </p>
         <p className="truncate">
           Local: {chamado.local ? chamado.local.nome : 'Não informado'}
         </p>
