@@ -1,6 +1,6 @@
 import { api } from './api-client'
 
-interface ObterMeusChamadosResponse {
+interface ObterChamadosPendentesResponse {
   chamados: {
     id: string
     idPublico: number
@@ -31,16 +31,17 @@ interface ObterMeusChamadosResponse {
   }[]
 }
 
-const obterMeusChamados = async () => {
+const obterChamadosPendentes = async () => {
   const result = await api
-    .get('chamados/usuario', {
+    .get('chamados/pendentes', {
       next: {
         tags: ['chamado'],
+        revalidate: 0,
       },
     })
-    .json<ObterMeusChamadosResponse>()
+    .json<ObterChamadosPendentesResponse>()
 
   return result
 }
 
-export { obterMeusChamados }
+export { obterChamadosPendentes }
