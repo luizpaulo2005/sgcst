@@ -4,7 +4,7 @@ import { ability } from '@/auth/auth'
 import { CardSemPermissaoPagina } from '@/components/card-sem-permissao-pagina'
 import { obterChamados } from '@/http/obter-chamados'
 
-import { ListaChamados } from './lista-chamados'
+import { TabelaChamados } from '../../../components/tabela-chamados'
 
 const Page = async () => {
   const permissoes = await ability()
@@ -34,7 +34,7 @@ const Page = async () => {
   return (
     <div className="space-y-2">
       <h1 className="text-xl font-semibold">Chamados</h1>
-      <ListaChamados chamados={chamados} />
+      <TabelaChamados chamados={chamados} mostrarUsuario />
     </div>
   )
 }

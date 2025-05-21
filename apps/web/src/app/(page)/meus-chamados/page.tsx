@@ -1,10 +1,9 @@
 import { Loader2 } from 'lucide-react'
 
-import { ability, auth } from '@/auth/auth'
+import { ability } from '@/auth/auth'
 import { CardSemPermissaoPagina } from '@/components/card-sem-permissao-pagina'
+import { TabelaChamados } from '@/components/tabela-chamados'
 import { obterMeusChamados } from '@/http/obter-meus-chamados'
-
-import { ListaChamados } from '../../../components/lista-chamados'
 
 const Page = async () => {
   const permissoes = await ability()
@@ -14,9 +13,6 @@ const Page = async () => {
   }
 
   const { chamados } = await obterMeusChamados()
-  const {
-    usuario: { id },
-  } = await auth()
 
   if (!chamados) {
     return (
@@ -26,7 +22,7 @@ const Page = async () => {
     )
   }
 
-  return <ListaChamados idUsuarioAtual={id} chamados={chamados} />
+  return <TabelaChamados chamados={chamados} />
 }
 
 export default Page
